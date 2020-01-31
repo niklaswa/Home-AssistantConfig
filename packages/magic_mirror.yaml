@@ -2,9 +2,8 @@
 homeassistant:
   customize:
     package.node_anchors:
-     customize: &customize
-       package: 'Magic Mirror' 
-
+      customize: &customize
+        package: 'Magic Mirror' 
     sensor.mm_display:
       icon: mdi:monitor
       friendly_name: Mirror Display
@@ -17,43 +16,37 @@ homeassistant:
       icon: mdi:power
 
 sensor:
-#  - platform: rest
-#    resource: http://192.168.178.50:8080/remote?action=MONITORSTATUS
-#    name: mm display
-#    value_template: '{{ value_json.monitor }}'
   - platform: command_line
     command: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.178.50 \"[[ \\$(echo 'pow 0' | cec-client -s -d 1) =~ 'status: on' ]] && echo 'on' || echo 'off'\""
     name: mm display
     scan_interval: 200
-#=======================================================================
-#
-#=======================================================================
+# =======================================================================
+# 
+# =======================================================================
 switch:
   - platform: command_line
     switches:
       mm_display:
-        # command_on: "curl -s 'http://192.168.178.50:8080/remote?action=MONITORON'"
         command_on: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.178.50 \"echo 'on 0' | cec-client -s -d 1\""
-        # command_off: "curl -s 'http://192.168.178.50:8080/remote?action=MONITOROFF'"
         command_off: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.178.50 \"echo 'standby 0' | cec-client -s -d 1\""
 
-#=======================================================================
-#
-#=======================================================================
+# =======================================================================
+# 
+# =======================================================================
 shell_command:
   mm_reboot: "curl -s 'http://192.168.178.50:8080/remote?action=REBOOT'"
   mm_shutdown: "curl -s 'http://192.168.178.50:8080/remote?action=SHUTDOWN'"
-#=======================================================================
-#
-#=======================================================================
+# =======================================================================
+# 
+# =======================================================================
 script:
   mm_reboot:
     alias: Magic Mirror Reboot
     sequence:
-    - data: {}
-      service: shell_command.mm_reboot
+      - data: {}
+        service: shell_command.mm_reboot
   mm_shutdown:
     alias: Magic Mirror ShutDown
     sequence:
-    - data: {}
-      service: shell_command.mm_shutdown   
+      - data: {}
+        service: shell_command.mm_shutdown

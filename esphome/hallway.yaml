@@ -30,14 +30,13 @@ sensor:
       name: "Flur Temperatur"
       oversampling: 16x
       filters:
-      - offset: -1.0
+        - offset: -1.0
     pressure:
       name: "Flur Luftdruck"
     humidity:
       name: "Flur Luftfeuchtigkeit"
     address: 0x76
     update_interval: 15s
-    
 
 binary_sensor:
   - platform: gpio

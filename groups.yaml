@@ -2,9 +2,9 @@
 allresidents:
   name: Alle Bewohner
   entities:
-   - person.niklas
-   - person.jan
-   - person.christoph
+    - person.niklas
+    - person.jan
+    - person.christoph
 bathroom:
   entities:
     - media_player.wohnzimmer

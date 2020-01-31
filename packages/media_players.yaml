@@ -1,8 +1,4 @@
 ---
-apple_tv:
- #   host: !secret ip_appletv
-  #  name: "Niklas' Apple TV"
-   # start_off: true
 media_player:
   - host: !secret ip_samsung_tv_43
     mac: !secret mac_samsungtv

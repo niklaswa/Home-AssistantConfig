@@ -32,5 +32,5 @@ ios:
 input_boolean:
   niklas_laundry:
     name: Niklas' Wäsche wird gewaschen
-    initial: off
+    initial: false
     icon: mdi:washing-machine

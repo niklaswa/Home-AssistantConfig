@@ -64,8 +64,8 @@ sensor:
         friendly_name: Cleaned Area
         unit_of_measurement: 'm ²'
         value_template: "Cleaned - Area {{ states.vacuum.xiaomi_vacuum.attributes.cleaned_area }}"
-        entity_id: vacuum.xiaomi_vacuum        
-      
+        entity_id: vacuum.xiaomi_vacuum
+
       vacuum_fan_speed_list:
         friendly_name: "Vacuum - Fan Speed List"
         value_template: "{{ states.vacuum.xiaomi_vacuum.attributes.fan_speed_list }}"
@@ -92,15 +92,15 @@ input_select:
   vacuum_fan_speed_list:
     name: Type of aspiration
     options:
-    - Leise
-    - Standard
-    - Stark
-    - MAX
+      - Leise
+      - Standard
+      - Stark
+      - MAX
   vacuum_zone:
     name: Which area to clean?
     options:
       - Choose the area
-      - Wohnung  
+      - Wohnung
       - Niklas
       - Küche
       - Jan
@@ -114,11 +114,6 @@ input_number:
     min: 1
     max: 3
     step: 1
-
-input_boolean:
-  vacuum_zone_settings:
-    name: zone settings
-    initial: false
 
 automation:
   - alias: Vacuum - Geschwindigkeit
@@ -139,7 +134,7 @@ automation:
           {% endif %}
   - alias: Vacuum - Selection of the area
     initial_state: 'on'
-    hide_entity: True
+    hide_entity: true
     trigger:
       platform: state
       entity_id: input_select.vacuum_zone
@@ -152,7 +147,7 @@ automation:
             script.vacuum_kitchen
           {% elif states.input_select.vacuum_zone.state == "Niklas" %}
             script.vacuum_niklas
-          {% elif states.input_select.vacuum_zone.state == "Flur" %} 
+          {% elif states.input_select.vacuum_zone.state == "Flur" %}
             script.vacuum_hallway
           {% elif states.input_select.vacuum_zone.state == "Wohnzimmer" %}
             script.vacuum_living_room
@@ -197,8 +192,6 @@ automation:
             script.vacuum_alert_error
           {% endif %}
 
-
-
 script:
   vacuum_set_quiet:
     sequence:
@@ -227,105 +220,107 @@ script:
 
   vacuum_flat:
     sequence:
-    - service: xiaomi_miio.vacuum_clean_zone
-      data:
-        entity_id: vacuum.xiaomi_vacuum
-        repeats: 1
-        zone: [[25013,20659,37363,32909]]
-    - service: script.vacuum_alert_start
+      - service: xiaomi_miio.vacuum_clean_zone
+        data:
+          entity_id: vacuum.xiaomi_vacuum
+          repeats: 1
+          zone: [[25013, 20659, 37363, 32909]]
+      - service: script.vacuum_alert_start
   vacuum_kitchen:
     sequence:
-    - service: xiaomi_miio.vacuum_clean_zone
-      data:
-        entity_id: vacuum.xiaomi_vacuum
-        repeats: 1
-        zone: [[27973,20362,31523,22712]]
-    - service: script.vacuum_alert_start
+      - service: xiaomi_miio.vacuum_clean_zone
+        data:
+          entity_id: vacuum.xiaomi_vacuum
+          repeats: 1
+          zone: [[27973, 20362, 31523, 22712]]
+      - service: script.vacuum_alert_start
   vacuum_hallway:
     sequence:
-    - service: xiaomi_miio.vacuum_clean_zone
-      data:
-        entity_id: vacuum.xiaomi_vacuum
-        repeats: 1
-        zone: [[28264,25330,32464,27630]]
-    - service: script.vacuum_alert_start
+      - service: xiaomi_miio.vacuum_clean_zone
+        data:
+          entity_id: vacuum.xiaomi_vacuum
+          repeats: 1
+          zone: [[28264, 25330, 32464, 27630]]
+      - service: script.vacuum_alert_start
   vacuum_living_room:
     sequence:
-    - service: xiaomi_miio.vacuum_clean_zone
-      data:
-        entity_id: vacuum.xiaomi_vacuum
-        repeats: 1
-        zone: [[25048,21651,28398,26651]]
-    - service: script.vacuum_alert_start
+      - service: xiaomi_miio.vacuum_clean_zone
+        data:
+          entity_id: vacuum.xiaomi_vacuum
+          repeats: 1
+          zone: [[25048, 21651, 28398, 26651]]
+      - service: script.vacuum_alert_start
   vacuum_niklas:
     sequence:
-    - service: xiaomi_miio.vacuum_clean_zone
-      data:
-        entity_id: vacuum.xiaomi_vacuum
-        repeats: 1
-        zone: [[28624,25960,31574,30260]]
-    - service: script.vacuum_alert_start
+      - service: xiaomi_miio.vacuum_clean_zone
+        data:
+          entity_id: vacuum.xiaomi_vacuum
+          repeats: 1
+          zone: [[28624, 25960, 31574, 30260]]
+      - service: script.vacuum_alert_start
   vacuum_jan:
     sequence:
-    - service: xiaomi_miio.vacuum_clean_zone
-      data:
-        entity_id: vacuum.xiaomi_vacuum
-        repeats: 1
-        zone: [[32914,26162,37364,31662]]
-    - service: script.vacuum_alert_start
+      - service: xiaomi_miio.vacuum_clean_zone
+        data:
+          entity_id: vacuum.xiaomi_vacuum
+          repeats: 1
+          zone: [[32914, 26162, 37364, 31662]]
+      - service: script.vacuum_alert_start
 
   vacuum_alert_start:
     alias: Vacuum alert start
     sequence:
-    - service: notify.mobile_app_iphone_11_pro_von_niklas
-      data_template:
-        title: "House alert"
-        message: "The robot has started cleaning the area: {{ states.input_select.vacuum_zone.state | lower }}."
-    - service: notify.mobile_app_iphone_11_pro_von_niklas
-      data:
-        title: "House alert ({{now().strftime('%H:%M')}})"
-        message: "The robot has started cleaning the area: {{ states.input_select.vacuum_zone.state | lower }}"
+      - service: notify.mobile_app_iphone_11_pro_von_niklas
+        data_template:
+          title: "House alert"
+          message: "The robot has started cleaning the area: {{ states.input_select.vacuum_zone.state | lower }}."
+      - service: notify.mobile_app_iphone_11_pro_von_niklas
+        data:
+          title: "House alert ({{now().strftime('%H:%M')}})"
+          message: "The robot has started cleaning the area: {{ states.input_select.vacuum_zone.state | lower }}"
   vacuum_alert_pause:
     alias: Vacuum alert pausa
     sequence:
-    - service: notify.mobile_app_iphone_11_pro_von_niklas
-      data_template:
-        title: "House alert"
-        message: "The vacuum cleaner has stopped cleaning the area: {{ states.input_select.vacuum_zone.state | lower }}. {% if 'error' in states.vacuum.xiaomi_vacuum.state %}Error code: {{ states.vacuum.xiaomi_vacuum.attributes.error }}.{% else %}{% endif %}"
-    - service: notify.mobile_app_iphone_11_pro_von_niklas
-      data:
-        title: "House alert ({{now().strftime('%H:%M')}})"
-        message: "The vacuum cleaner has stopped cleaning the area: {{ states.input_select.vacuum_zone.state | lower }}. {% if 'error' in states.vacuum.xiaomi_vacuum.state %}Error code: {{ states.vacuum.xiaomi_vacuum.attributes.error }}.{% else %}{% endif %}"
+      - service: notify.mobile_app_iphone_11_pro_von_niklas
+        data_template:
+          title: "House alert"
+          message: "The vacuum cleaner has stopped cleaning the area: {{ states.input_select.vacuum_zone.state | lower }}. {% if 'error' in states.vacuum.xiaomi_vacuum.state %}Error code: {{ states.vacuum.xiaomi_vacuum.attributes.error }}.{% else %}{% endif %}"
+      - service: notify.mobile_app_iphone_11_pro_von_niklas
+        data:
+          title: "House alert ({{now().strftime('%H:%M')}})"
+          message: "The vacuum cleaner has stopped cleaning the area: {{ states.input_select.vacuum_zone.state | lower }}. {% if 'error' in states.vacuum.xiaomi_vacuum.state %}Error code: {{ states.vacuum.xiaomi_vacuum.attributes.error }}.{% else %}{% endif %}"
   vacuum_alert_back_to_home:
     alias: Vacuum alert back to home
     sequence:
-    - condition: template
-      value_template: "{% if is_state('input_select.vacuum_zone', 'Choose the area') %}False{% else %}True{% endif %}"
-    - service: notify.mobile_app_iphone_11_pro_von_niklas
-      data_template:
-        title: "House alert"
-        message: "The robot has finished cleaning the area {{ states.input_select.vacuum_zone.state | lower }}. cleaned {{ states.vacuum.xiaomi_vacuum.attributes.cleaned_area }} square meters in {{ states.vacuum.xiaomi_vacuum.attributes.cleaning_time }} minutes and now it is loading"
-    - service: notify.mobile_app_iphone_11_pro_von_niklas
-      data:
-        title: "House alert ({{now().strftime('%H:%M')}})"
-        message: "The robot has finished cleaning the area {{ states.input_select.vacuum_zone.state | lower }}. cleaned {{ states.vacuum.xiaomi_vacuum.attributes.cleaned_area }} square meters in {{ states.vacuum.xiaomi_vacuum.attributes.cleaning_time }} minutes and now it is loading."
+      - condition: template
+        value_template: "{% if is_state('input_select.vacuum_zone', 'Choose the area') %}False{% else %}True{% endif %}"
+      - service: notify.mobile_app_iphone_11_pro_von_niklas
+        data_template:
+          title: "House alert"
+          message: "The robot has finished cleaning the area {{ states.input_select.vacuum_zone.state | lower }}. cleaned {{ states.vacuum.xiaomi_vacuum.attributes.cleaned_area }} square meters in {{ states.vacuum.xiaomi_vacuum.attributes.cleaning_time }} minutes and now it is loading"
+      - service: notify.mobile_app_iphone_11_pro_von_niklas
+        data:
+          title: "House alert ({{now().strftime('%H:%M')}})"
+          message: "The robot has finished cleaning the area {{ states.input_select.vacuum_zone.state | lower }}. cleaned {{ states.vacuum.xiaomi_vacuum.attributes.cleaned_area }} square meters in {{ states.vacuum.xiaomi_vacuum.attributes.cleaning_time }} minutes and now it is loading."
   vacuum_alert_error:
     alias: Vacuum alert error
     sequence:
-    - service: notify.mobile_app_iphone_11_pro_von_niklas
-      data_template:
-        title: "House alert"
-        message: "The vacuum cleaner stopped and reported an error while cleaning the area {{ states.input_select.vacuum_zone.state | lower }}."
-    - service: notify.mobile_app_iphone_11_pro_von_niklas
-      data:
-        title: "House alert ({{now().strftime('%H:%M')}})"
-        message: "The vacuum cleaner stopped and reported an error while cleaning the area {{ states.input_select.vacuum_zone.state | lower }}."
-
+      - service: notify.mobile_app_iphone_11_pro_von_niklas
+        data_template:
+          title: "House alert"
+          message: "The vacuum cleaner stopped and reported an error while cleaning the area {{ states.input_select.vacuum_zone.state | lower }}."
+      - service: notify.mobile_app_iphone_11_pro_von_niklas
+        data:
+          title: "House alert ({{now().strftime('%H:%M')}})"
+          message: "The vacuum cleaner stopped and reported an error while cleaning the area {{ states.input_select.vacuum_zone.state | lower }}."
 
 # Clean up automations
 input_boolean:
   vacuum_cleaned_today:
     name: Heute schon gesaugt
+    initial: false
+  vacuum_zone_settings:
+    name: zone settings
     initial: false
 
 homeassistant:
