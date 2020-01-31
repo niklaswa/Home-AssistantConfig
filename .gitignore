@@ -29,6 +29,7 @@ tradfri.conf
 .spotify-token-cache
 node-red/*
 esphome/.esphome/esphome.json
+core
 
 homebridge/accessories/
 homebridge/persist/

@@ -2,8 +2,53 @@
 ########################################################################
 ### Humidifier
 ########################################################################
+automation:
+  - action:
+      - data_template:
+          entity_id: fan.luftbefeuchter
+          speed: "{{ trigger.to_state.state }}"
+        service: fan.set_speed
+    alias: "Xiaomi Humidifier Adjust Level"
+    id: xiaomi_humidifier_speed
+    trigger:
+      - entity_id: input_select.xiaomi_humidifier_speed
+        platform: state
 fan:
   - host: !secret ip_xiaomi_humidifier
     platform: xiaomi_miio
     token: !secret secret_xiaomi_humidifier
     model: zhimi.humidifier.cb1
+    name: Luftbefeuchter
+sensor:
+  - platform: template
+    sensors:
+      xiaomi_humidifier_humidity:
+        friendly_name: "Luftbefeuchter Luftfeuchtigkeit"
+        value_template: "{{ state_attr('fan.luftbefeuchter', 'humidity') }}"
+        device_class: humidity
+        unit_of_measurement: '%'
+      xiaomi_humidifier_target_humidity:
+        friendly_name: "Luftbefeuchter Zielluftfeuchtigkeit"
+        value_template: "{{ state_attr('fan.luftbefeuchter', 'target_humidity') }}"
+        device_class: humidity
+        unit_of_measurement: '%'
+      xiaomi_humidifier_temperature:
+        friendly_name: "Luftbefeuchter Temperatur"
+        value_template: "{{ state_attr('fan.luftbefeuchter', 'temperature') }}"
+        device_class: temperature
+        unit_of_measurement: '°C'
+
+
+input_select:
+  xiaomi_humidifier_speed:
+    name: Luftbefeuchter Stufe
+    options:
+      - Silent
+      - Medium
+      - High
+      - Auto
+
+homeassistant:
+  customize:
+    fan.luftbefeuchter:
+      icon: mdi:air-humidifier
