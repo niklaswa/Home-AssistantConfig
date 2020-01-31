@@ -38,9 +38,9 @@ switch:
     pin: GPIO14
     id: relay
     on_turn_on:
-    - switch.turn_on: blue_led
+      - switch.turn_on: blue_led
     on_turn_off:
-    - switch.turn_off: blue_led
+      - switch.turn_off: blue_led
 
 # Use red LED for connectivity status indicator
 status_led:

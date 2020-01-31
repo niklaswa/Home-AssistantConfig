@@ -3,7 +3,7 @@ homeassistant:
   customize:
     package.node_anchors:
       customize: &customize
-        package: 'Magic Mirror' 
+        package: 'Magic Mirror'
     sensor.mm_display:
       icon: mdi:monitor
       friendly_name: Mirror Display
@@ -21,7 +21,7 @@ sensor:
     name: mm display
     scan_interval: 200
 # =======================================================================
-# 
+#
 # =======================================================================
 switch:
   - platform: command_line
@@ -31,13 +31,13 @@ switch:
         command_off: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.178.50 \"echo 'standby 0' | cec-client -s -d 1\""
 
 # =======================================================================
-# 
+#
 # =======================================================================
 shell_command:
   mm_reboot: "curl -s 'http://192.168.178.50:8080/remote?action=REBOOT'"
   mm_shutdown: "curl -s 'http://192.168.178.50:8080/remote?action=SHUTDOWN'"
 # =======================================================================
-# 
+#
 # =======================================================================
 script:
   mm_reboot:
