@@ -1,0 +1,60 @@
+---
+esphome:
+  name: bathroom
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+api:
+
+# Enable logging
+logger:
+#  level: DEBUG
+
+ota:
+  password: !secret ota_password
+
+sensor:
+  - platform: dht
+    pin: D7
+    temperature:
+      name: "Bad Temperatur"
+    humidity:
+      name: "Bad Luftfeuchtigkeit"
+    model: AM2302
+  - platform: adc
+    pin: A0
+    name: "Bad Helligkeit"
+    update_interval: 1s
+    unit_of_measurement: lux
+    filters:
+      - or:
+          - throttle: 15s
+          - delta: 0.23
+      - lambda: >-
+          return (x / 10000.0) * 2000000.0;
+
+output:
+  - platform: esp8266_pwm
+    pin: D1
+    id: redgpio
+  - platform: esp8266_pwm
+    pin: D2
+    id: greengpio
+  - platform: esp8266_pwm
+    pin: D3
+    id: bluegpio
+
+light:
+  - platform: rgb
+    name: "Bad LED"
+    red: redgpio
+    green: greengpio
+    blue: bluegpio
+
+binary_sensor:
+  - platform: status
+    name: "Bad Status"

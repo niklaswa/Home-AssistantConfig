@@ -1,0 +1,24 @@
+---
+climate:
+  - ac_mode: true
+    away_temp: 29
+    heater: switch.delonghi
+    max_temp: 27
+    min_temp: 18
+    name: Klimaanlage
+    platform: generic_thermostat
+    target_sensor: sensor.niklas_zimmer_temperatur
+switch:
+  - host: !secret ip_broadlink
+    mac: !secret mac_broadlink
+    platform: broadlink
+    switches:
+      delonghi:
+        command_off: JgBIAAABL5UWEBYRFhAWMxgQFhEWNBQTFhAWERYRFTUWNBYQFhEWERY0FBIWERYRFRIVNRQSFhEWNBUSFTQWNRYQFRIVNRYQFQANBQ==
+        command_on: JgBIAAABKJMUEBETFBARNxETExERNxETFBARExMREjYRNxEUExARExM2ExASEhMRExESExMQETcTNRM2EzUTEBITFBAREhMSEwANBQ==
+        friendly_name: Klimaanlage
+      ventilation:
+        command_off: JgBIAAABKZITERMRExETNhIREhITNhIREhMSERITEjYSERMSEhESNhM2EhIRExISERMTERETEhIRNxE3EzUTERETExERExMREQANBQ==
+        command_on: JgBIAAABJ5QVDxETFQ8VMxUPEhIVMxQQEhMUDxISFTQUEBESFBEUNBQ0ERITEhMRERMUEBESFjMVMxUzFTMVDxISFBARExQQFAANBQ==
+        friendly_name: Lueftung
+    timeout: 2

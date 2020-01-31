@@ -1,0 +1,294 @@
+---
+homeassistant:
+  customize: !include customize.yaml
+  customize_glob:
+    script.*:
+      hidden: true
+    scene.*:
+      hidden: true
+  # whitelist_external_dirs:
+  #   - !secret whitelist_external_dir
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - !secret ip_host
+        - !secret ip_magicmirror
+        - !secret ip_pc
+        - 192.168.178.42
+        - 192.168.178.50
+        - 127.0.0.1
+
+  packages: !include_dir_named packages
+
+auth:
+
+system_health:
+
+hacs:
+  token: !secret hacs_github_token
+
+mobile_app:
+
+person:
+
+frontend:
+  themes: !include themes.yaml
+
+# panel_custom:
+#   - name: floorplan
+#     sidebar_title: Floorplan
+#     sidebar_icon: mdi:home
+#     url_path: floorplan
+#     config: !include floorplan.yaml
+#   - name: floorplan
+#     sidebar_title: 3D Floorplan
+#     sidebar_icon: mdi:home
+#     url_path: 3dfloorplan
+#     config: !include 3dfloorplan.yaml
+
+map:
+
+# Enables configuration UI
+config:
+
+http:
+  ip_ban_enabled: true
+  login_attempts_threshold: 3
+  base_url: !secret base_url
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - !secret ip_proxy
+
+api:
+
+hue:
+  bridges:
+    - host: !secret ip_hue
+      allow_hue_groups: false
+      allow_unreachable: true
+
+camera:
+  - platform: xiaomi
+    name: Niklas' Zimmer
+    host: !secret ip_camera
+    model: 'xiaofang'
+    password: YOUR_PASSWORD
+    ffmpeg_arguments: '-vf scale=800:450'
+
+updater:
+
+discovery:
+  ignore:
+    - frontier_silicon
+    - igd
+    - homekit
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+weather:
+  - platform: openweathermap
+    api_key: !secret owm_secret
+
+light:
+  - platform: flux_led
+    devices:
+      !secret ip_trophy_leds:
+        name: LEDs bei den Pokalen
+        mode: rgb
+
+binary_sensor:
+  - platform: template
+    sensors:
+      bath_light:
+        device_class: light
+        friendly_name: "Badlicht"
+        value_template: >-
+          {{ states.sensor.bad_helligkeit.state | float > 100 }}
+
+sensor:
+  - platform: openweathermap
+    api_key: !secret owm_secret
+    language: de
+    monitored_conditions:
+      - weather
+      - temperature
+  - platform: yr
+
+  - platform: miflora
+    mac: !secret mac_miflora
+    name: Drachenbaum
+  - platform: discord_game
+    token: !secret discord_bot_token
+    members:
+      - Niklas#4822
+      - Sunny#8575
+      - Marco#9609
+
+plant:
+  drachenbaum:
+    sensors:
+      moisture: sensor.drachenbaum_moisture
+      battery: sensor.drachenbaum_battery
+      temperature: sensor.drachenbaum_temperature
+      conductivity: sensor.drachenbaum_conductivity
+      brightness: sensor.drachenbaum_light_intensity
+    min_moisture: 15
+    max_moisture: 60
+    min_battery: 17
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_temperature: 15
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+    language: 'de'
+
+xiaomi_aqara:
+  discovery_retry: 5
+  gateways:
+    - key: !secret aqara_key
+
+# google:
+#  client_id: !secret google_calendar_id
+#  client_secret: !secret google_calendar_secret
+
+switch:
+  - platform: wake_on_lan
+    name: "NiklasPC"
+    mac: !secret mac_pc
+    host: !secret ip_pc
+    turn_off:
+      service: shell_command.pc_shutdown
+
+  - platform: mqtt
+    name: Sonoff1
+    command_topic: "cmnd/sonoff/power"
+    state_topic: "stat/sonoff/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+  - platform: template
+    switches:
+      rocketleague:
+        value_template: false
+        turn_on:
+          service: shell_command.pc_start_rocketleague
+        turn_off:
+          service: shell_command.pc_shutdown
+      niklascomputer:
+        value_template: "{{ is_state('binary_sensor.computer_led', 'on') }}"
+        turn_on:
+          service: switch.turn_on
+          data:
+            entity_id: switch.computer
+        turn_off:
+          service: shell_command.pc_shutdown
+      computer_zubehoer:
+        value_template: "{{ is_state('light.pc_zubehor', 'on') }}"
+        turn_on:
+          service: light.turn_on
+          data:
+            entity_id: light.pc_zubehor
+        turn_off:
+          service: light.turn_off
+          data:
+            entity_id: light.pc_zubehor
+      kamera:
+        value_template: "{{ is_state('light.kamera', 'on') }}"
+        turn_on:
+          service: light.turn_on
+          data:
+            entity_id: light.kamera
+        turn_off:
+          service: light.turn_off
+          data:
+            entity_id: light.kamera
+      sandwichmaker:
+        value_template: "{{ is_state('light.onoff_plug_1', 'on') }}"
+        turn_on:
+          service: light.turn_on
+          data:
+            entity_id: light.onoff_plug_1
+        turn_off:
+          service: light.turn_off
+          data:
+            entity_id: light.onoff_plug_1
+
+# tuya:
+#   username: !secret tuya_username
+#   password: !secret tuya_password
+#   country_code: !secret tuya_cc
+
+mqtt:
+  broker: !secret mqtt_broker
+  port: !secret mqtt_port
+  client_id: !secret mqtt_client_id
+  keepalive: !secret mqtt_keepalive
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  discovery: false
+
+# notify:
+#   - name: HTML5
+#     platform: html5
+#     gcm_api_key: !secret gcm_api_key
+#     gcm_sender_id: !secret gcm_sender_id
+
+ios:
+  push:
+    categories:
+      - name: Test
+        identifier: 'test'
+        actions:
+          - identifier: 'WOW'
+            title: 'Yeah'
+            destructive: true
+            activationMode: 'background'
+            authenticationRequired: true
+
+speedtestdotnet:
+  scan_interval:
+    minutes: 0
+    hours: 5
+
+zone:
+  - name: Arbeit
+    latitude: !secret zone_work_lat
+    longitude: !secret zone_work_long
+    icon: mdi:worker
+    radius: 75
+  - name: Arbeit
+    latitude: !secret zone_work2_lat
+    longitude: !secret zone_work2_long
+    icon: mdi:worker
+  - name: Kantine
+    latitude: !secret zone_canteen_lat
+    longitude: !secret zone_canteen_long
+    radius: 50
+    icon: mdi:food
+  - name: Home
+    latitude: !secret zone_home_lat
+    longitude: !secret zone_home_long
+    radius: 30
+    icon: mdi:home
+
+script: !include scripts.yaml
+shell_command: !include shell_commands.yaml
+scene: !include scenes.yaml
+group: !include groups.yaml
+automation: !include automations.yaml

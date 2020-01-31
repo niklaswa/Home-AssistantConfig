@@ -1,0 +1,170 @@
+- id: '1534018905689'
+  alias: Haustür Benachrichtigung
+  trigger:
+  - entity_id: person.niklas
+    event: enter
+    platform: zone
+    zone: zone.home
+  condition: []
+  action:
+  - data:
+      data:
+        apns_headers:
+          apns-collapse-id: frontdoor-ring
+        push:
+          category: frontdoor
+      message: '{{ "\uD83D\uDD10" }} Möchtest du die Haustür aufschließen?
+
+
+
+        '
+    service: notify.mobile_app_iphone_11_pro_von_niklas
+- action:
+  - entity_id: lock.haustur
+    service: lock.unlock
+  alias: Haustür aufschließen
+  id: unlock_frontdoor
+  trigger:
+    event_data:
+      actionName: UNLOCK_FRONTDOOR
+    event_type: ios.notification_action_fired
+    platform: event
+- id: '1534171508264'
+  alias: Klingel Benachrichtigung
+  trigger:
+  - entity_id: binary_sensor.klingel
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      data:
+        apns_headers:
+          apns-collapse-id: frontdoor-ring
+        push:
+          category: frontdoor
+      message: '{{ "\uD83D\uDD14" }} Ding dong! Haustür aufschließen?
+
+
+        '
+    service: notify.mobile_app_iphone_11_pro_von_niklas
+  - data:
+      message: Tür klingelt!
+    service: notify.niklas_echo
+- id: '1577632826372'
+  alias: Waschmaschine an, warst du das?
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.washing_machine
+    for: 00:00:15
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: person.niklas
+    state: home
+  action:
+  - alias: ''
+    data:
+      data:
+        apns_headers:
+          apns-collapse-id: washing-machine
+        push:
+          category: washingmachine_activated
+      message: Hast du die Waschmaschine an gemacht?
+      title: Waschmaschine
+    service: notify.mobile_app_iphone_11_pro_von_niklas
+- id: '1577633944073'
+  alias: Niklas Wäsche aktivieren
+  description: ''
+  trigger:
+  - event_data:
+      actionName: NIKLAS_LAUNDRY
+    event_type: ios.notification_action_fired
+    platform: event
+  condition: []
+  action:
+  - entity_id: input_boolean.niklas_laundry
+    service: input_boolean.turn_on
+- id: '1577635753186'
+  alias: Wäsche fertig
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.washing_machine
+    for: 00:00:15
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: input_boolean.niklas_laundry
+    state: 'on'
+  action:
+  - data:
+      data:
+        attachment:
+          content-type: gif
+          hide-thumbnail: false
+          url: https://media2.giphy.com/media/YE30zVuEf3Heo/giphy.gif?cid=790b7611bb823a9f11aa46ea4318f7ed1a4b5b5d468a6d72&rid=giphy.gif
+      message: Wäsche fertig!
+    service: notify.mobile_app_iphone_11_pro_von_niklas
+  - entity_id: input_boolean.niklas_laundry
+    service: input_boolean.turn_off
+- id: '1579596927742'
+  alias: Alle Personen weg
+  description: Wenn alle Personen die Wohnung verlassen
+  trigger:
+  - entity_id: group.allresidents
+    from: home
+    platform: state
+  condition: []
+  action:
+  - entity_id: light.flurlicht
+    service: light.turn_off
+  - entity_id: switch.mm_display
+    service: switch.turn_off
+- id: '1579603866648'
+  alias: Jemand kommt Zuhause an
+  description: ''
+  trigger:
+  - entity_id: group.allresidents
+    platform: state
+    to: home
+  condition: []
+  action:
+  - entity_id: switch.mm_display
+    service: switch.turn_on
+- id: '1580217531299'
+  alias: Tägliches Saugen
+  description: ''
+  trigger:
+  - at: '14:20'
+    platform: time
+  - at: '10:00'
+    platform: time
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacuum_cleaned_today
+    state: 'off'
+  - condition: state
+    entity_id: group.allresidents
+    state: not_home
+  action:
+  - entity_id: vacuum.xiaomi_vacuum
+    service: vacuum.start
+  - entity_id: input_boolean.vacuum_cleaned_today
+    service: input_boolean.turn_on
+- id: '1580217731266'
+  alias: Reset daily vacuum
+  description: ''
+  trigger:
+  - at: 0:00
+    platform: time
+  condition:
+  - condition: state
+    entity_id: automation.tagliches_saugen
+    state: 'on'
+  action:
+  - entity_id: input_boolean.vacuum_cleaned_today
+    service: input_boolean.turn_off

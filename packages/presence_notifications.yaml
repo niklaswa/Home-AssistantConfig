@@ -1,0 +1,101 @@
+---
+automation:
+  - action:
+      - data:
+          message: "Niklas ist Zuhause"
+        service: notify.ios_niphonex
+    alias: "Niklas Zuhause"
+    condition:
+      condition: state
+      entity_id: input_boolean.presence_notifications
+      state: "on"
+    hide_entity: true
+    id: niklas_home
+    initial_state: "off"
+    trigger:
+      - entity_id: device_tracker.niphonex
+        platform: state
+        to: home
+  - action:
+      - data:
+          message: "Lukas ist Zuhause"
+        service: notify.ios_niphonex
+    alias: "Lukas Zuhause"
+    condition:
+      condition: state
+      entity_id: input_boolean.presence_notifications
+      state: "on"
+    hide_entity: true
+    id: lukas_home
+    initial_state: "off"
+    trigger:
+      - entity_id: device_tracker.loneplus2
+        platform: state
+        to: home
+  - action:
+      - data:
+          message: "Jan ist Zuhause"
+        service: notify.ios_niphonex
+    alias: "Jan Zuhause"
+    condition:
+      condition: state
+      entity_id: input_boolean.presence_notifications
+      state: "on"
+    hide_entity: true
+    id: jan_home
+    initial_state: "off"
+    trigger:
+      - entity_id: device_tracker.jlgg6
+        platform: state
+        to: home
+  - action:
+      - data:
+          message: "Lukas verlässt die Wohnung"
+        service: notify.ios_niphonex
+    alias: "Lukas weg"
+    condition:
+      condition: state
+      entity_id: input_boolean.presence_notifications
+      state: "on"
+    hide_entity: true
+    id: lukas_away
+    initial_state: "off"
+    trigger:
+      - entity_id: device_tracker.loneplus2
+        platform: state
+        to: not_home
+  - action:
+      - data:
+          message: "Jan verlässt die Wohnung"
+        service: notify.ios_niphonex
+    alias: "Jan weg"
+    condition:
+      condition: state
+      entity_id: input_boolean.presence_notifications
+      state: "on"
+    hide_entity: true
+    id: jan_away
+    initial_state: "off"
+    trigger:
+      - entity_id: device_tracker.jlgg6
+        platform: state
+        to: not_home
+  - action:
+      - data:
+          message: "Niklas verlässt die Wohnung"
+        service: notify.ios_niphonex
+    alias: "Niklas weg"
+    condition:
+      condition: state
+      entity_id: input_boolean.presence_notifications
+      state: "on"
+    hide_entity: true
+    id: niklas_away
+    initial_state: "off"
+    trigger:
+      - entity_id: device_tracker.niphonex
+        platform: state
+        to: not_home
+input_boolean:
+  presence_notifications:
+    name: Anwesenheitsbenachrichtigungen

@@ -1,0 +1,243 @@
+person.niklas:
+  entity_picture: https://pbs.twimg.com/profile_images/1186688394665046018/rxqaG8D6_400x400.jpg
+  friendly_name: Niklas
+person.lukas:
+  entity_picture: xxx
+  friendly_name: Lukas
+  icon: mdi:cellphone-android
+person.jan:
+  entity_picture: xxx
+  friendly_name: Jan
+  icon: mdi:cellphone-android
+light.computer_zubehor:
+  friendly_name: Monitore & Lautsprecher
+  icon: mdi:monitor-multiple
+light.luefter:
+  friendly_name: Lüfter
+  device_class: fan
+  icon: mdi:fan
+light.bett:
+  friendly_name: Bett
+  icon: mdi:hotel
+light.glaskugel:
+  friendly_name: Glaskugel
+  icon: mdi:brightness-1
+light.sockel:
+  friendly_name: Sockel
+  icon: mdi:alarm-light
+light.kamera:
+  friendly_name: Kamera
+  icon: mdi:cctv
+light.stehlampe:
+  friendly_name: Stehlampe
+  icon: mdi:lamp
+light.deckenlampe:
+  friendly_name: Deckenlampe
+  icon: mdi:ceiling-light
+light.schreibtisch:
+  friendly_name: Schreibtisch
+  icon: mdi:led-strip
+switch.niklaspc:
+  friendly_name: Niklas' Computer
+  icon: mdi:monitor
+scene.gute_nacht:
+  friendly_name: Gute Nacht
+  icon: mdi:sleep
+scene.rgb:
+  friendly_name: RGB
+  icon: mdi:format-color-fill
+scene.movie:
+  icon: mdi:television
+script.tv:
+  friendly_name: Netflix-Zeit
+  icon: mdi:netflix
+script.all_off:
+  friendly_name: Alles aus
+  icon: mdi:flash-off
+script.all_on:
+  friendly_name: Alles an
+  icon: mdi:flash
+script.night:
+  friendly_name: Gute Nacht
+  icon: mdi:sleep
+camera.ffmpeg:
+  friendly_name: Kamera
+  icon: mdi:cctv
+media_player.samsung_tv_remote:
+  friendly_name: TV
+  icon: mdi:television
+sensor.iphone_7_plus_von_niklas_battery_level:
+  friendly_name: iPhone Batterie
+  hidden: true
+sensor.iphone_7_plus_von_niklas_battery_state:
+  friendly_name: iPhone Status
+  hidden: true
+switch.klimaanlage:
+  hidden: true
+  friendly_name: Klimaanlage
+  icon: mdi:air-conditioner
+  assumed_state: false
+switch.lueftung:
+  hidden: true
+  friendly_name: Lüftung
+  icon: mdi:fan
+  assumed_state: false
+switch.leds_bei_den_pokalen:
+  friendly_name: LEDs bei den Pokalen
+  icon: mdi:trophy
+  assumed_state: false
+switch.fernseher:
+  friendly_name: Fernseher
+  icon: mdi:television
+device_tracker.ncomputer:
+  friendly_name: Niklas PC
+  icon: mdi:desktop-classic
+device_tracker.ngooglenexus5:
+  friendly_name: Nexus 5
+device_tracker.nsamsungxcover3:
+  friendly_name: XCover 3
+device_tracker.nlaptopdell:
+  friendly_name: Dell Laptop
+device_tracker.nipad4gen:
+  friendly_name: iPad 4
+sensor.speedtest_ping:
+  friendly_name: Ping
+  icon: mdi:truck
+sensor.speedtest_download:
+  friendly_name: Download
+  icon: mdi:download
+sensor.speedtest_upload:
+  friendly_name: Upload
+  icon: mdi:upload
+sensor.ipad_battery_level:
+  hidden: true
+sensor.ipad_battery_state:
+  hidden: true
+remote.niklas_apple_tv:
+  hidden: true
+device_tracker.janpc:
+  friendly_name: Jan PC
+  icon: mdi:desktop-classic
+  name: Jan PC
+device_tracker.lcomputer:
+  friendly_name: Lukas PC
+  icon: mdi:desktop-classic
+sensor.living_room_lux:
+  friendly_name: Helligkeit
+switch.fritzdect_200_1:
+  friendly_name: Fritz!Dect 200
+  icon: mdi:power-socket-eu
+device_tracker.nlenovobe1am872:
+  friendly_name: Lenovo Laptop
+  icon: mdi:laptop-windows
+sensor.taunusplatz_darmstadt_to_tz_rhein_main_darmstadt:
+  hidden: true
+media_player.amazon_fire_tv:
+  hidden: true
+  icon: mdi:television-box
+binary_sensor.door_window_sensor_158d0002046916:
+  friendly_name: Wohnungstür
+  device_class: door
+binary_sensor.door_window_sensor_158d00020b7d0f:
+  device_class: door
+  friendly_name: Niklas' Tür
+sensor.sn1_humidity:
+  device_class: humidity
+sensor.sn1_temperature:
+  device_class: temperature
+sensor.sn2_humidity:
+  device_class: humidity
+sensor.sn2_temperature:
+  device_class: temperature
+device_tracker.nap:
+  hidden: true
+device_tracker.nsamsung51anlage:
+  hidden: true
+device_tracker.philipshuebridge:
+  hidden: true
+device_tracker.fritzbox:
+  hidden: true
+device_tracker.nbroadlink:
+  hidden: true
+device_tracker.nkamera:
+  hidden: true
+device_tracker.namazonecho:
+  hidden: true
+device_tracker.nhassbian:
+  hidden: true
+device_tracker.ntvsamsung6series43:
+  hidden: true
+device_tracker.nsonosplayone:
+  hidden: true
+device_tracker.nchromecast1gen2013:
+  hidden: true
+device_tracker.napplewatch2gen:
+  friendly_name: Watch
+  hidden: true
+device_tracker.nsteamlink2b6e:
+  friendly_name: Steam Link
+  hidden: true
+  icon: mdi:steam
+device_tracker.ltablet:
+  friendly_name: Lukas Tablet
+  icon: mdi:tablet-android
+automation.sandwich_counter:
+  hidden: true
+automation.die_post_ist_da:
+  hidden: true
+device_tracker.winc0000:
+  hidden: true
+input_number.xiaomi_miio_favorite_level:
+  friendly_name: Luftfilter Stärke
+climate.comet_dect_2:
+  friendly_name: Heizung
+plant.drachenbaum:
+  friendly_name: Drachenbaum
+sensor.livingroom_motion:
+  friendly_name: Bewegung
+  device_class: motion
+switch.kamera:
+  friendly_name: Kamera
+switch.luefter:
+  device_class: fan
+  friendly_name: Lüfter
+  icon: mdi:fan
+switch.sandwichmaker:
+  friendly_name: Sandwichmaker
+switch.computer_zubehor:
+  friendly_name: Monitore & Lautsprecher
+light.onoff_plug_5:
+  friendly_name: LED Küche
+switch.led1:
+  icon: mdi:led-strip
+cover.curtain_158d0002830b2f: {}
+light.kuechenlicht:
+  icon: mdi:ceiling-light
+light.flurlicht:
+  icon: mdi:ceiling-light
+sensor.luftdaten_13086_humidity:
+  device_class: humidity
+  friendly_name: Luftdaten Luftfeuchtigkeit
+sensor.luftdaten_13086_temperature:
+  device_class: temperature
+  friendly_name: Luftdaten Temperatur
+sensor.air_purifier_aqi:
+  icon: mdi:weather-windy
+climate.klimaanlage:
+  icon: mdi:air-conditioner
+switch.ventilation:
+  icon: mdi:fan
+sensor.luftdaten_13085_p1:
+  friendly_name: Luftdaten P1
+sensor.luftdaten_13085_p2:
+  friendly_name: Luftdaten P2
+switch.niklascomputer:
+  friendly_name: Niklas' Computer Schalter
+  icon: mdi:desktop-classic
+switch.rocketleague:
+  friendly_name: Rocket League
+  icon: mdi:rocket
+switch.teckin_1_relay:
+  icon: mdi:fan
+fan.xiaomi_miio_device:
+  icon: mdi:air-purifier

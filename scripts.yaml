@@ -1,0 +1,126 @@
+---
+all_off:
+  alias: "Lichter + PC aus"
+  sequence:
+    - data:
+        entity_id: "light.stehlampe, light.sockel, light.glaskugel, light.bett"
+      service: light.turn_off
+    - data:
+        entity_id: media_player.samsung_smart_remote
+      service: media_player.turn_off
+    - data:
+        entity_id: light.computer_zubehor
+      service: light.turn_off
+    - data:
+        entity_id: switch.niklaspc
+      service: switch.turn_off
+    - service: shell_command.pc_standby
+all_on:
+  alias: "Lichter + PC an"
+  sequence:
+    - data:
+        entity_id: scene.rgb
+      service: scene.turn_on
+    - data:
+        entity_id: light.computer_zubehor
+      service: light.turn_on
+    - data:
+        entity_id: switch.niklaspc
+      service: switch.turn_on
+bright:
+  alias: "Alles hell"
+  sequence:
+    - data:
+        entity_id: scene.hell
+      service: scene.turn_on
+coming_home:
+  alias: "Willkommen zu Hause"
+  sequence:
+    - data:
+        entity_id: media_player.spotify
+        volume_level: 0.6
+      service: media_player.volume_set
+    - data:
+        entity_id: media_player.spotify
+        source: "Niklas' Echo"
+      service: media_player.select_source
+    - data:
+        entity_id: scene.rgb
+      service: scene.turn_on
+night:
+  alias: "Gute Nacht"
+  sequence:
+    - data:
+        entity_id: "light.stehlampe, light.sockel, light.glaskugel"
+      service: light.turn_off
+    - data:
+        brightness: 5
+        entity_id: light.bett
+        rgb_color:
+          - 49
+          - 32
+          - 117
+      service: light.turn_on
+    - data:
+        entity_id: light.computer_zubehor
+      service: light.turn_off
+    - data:
+        entity_id: switch.niklaspc
+      service: switch.turn_off
+    - service: shell_command.pc_standby
+pc_off:
+  alias: "Computer aus"
+  sequence:
+    - service: shell_command.pc_shutdown
+    - delay: 30
+    - data:
+        entity_id: light.computer_zubehor
+      service: light.turn_off
+pc_on:
+  alias: "Computer an"
+  sequence:
+    - data:
+        entity_id: light.computer_zubehor
+      service: light.turn_on
+    - data:
+        entity_id: switch.niklaspc
+      service: switch.turn_on
+sonos_say:
+  alias: "Sonos TTS script"
+  sequence:
+    - data_template:
+        entity_id: "{{ sonos_entity }}"
+      service: media_player.sonos_snapshot
+    - data_template:
+        entity_id: "{{ sonos_entity }}"
+      service: media_player.sonos_unjoin
+    - data_template:
+        entity_id: "{{ sonos_entity }}"
+        volume_level: "{{ volume }}"
+      service: media_player.volume_set
+    - data_template:
+        entity_id: "{{ sonos_entity }}"
+        language: de
+        message: "{{ message }}"
+      service: tts.google_say
+    - delay: "{{ delay }}"
+    - data_template:
+        entity_id: "{{ sonos_entity }}"
+      service: media_player.sonos_restore
+tv:
+  alias: Fernsehen
+  sequence:
+    - data:
+        entity_id: "light.stehlampe, light.sockel, light.glaskugel"
+      service: light.turn_off
+    - data:
+        brightness: 5
+        entity_id: light.bett
+        rgb_color:
+          - 186
+          - 43
+          - 0
+      service: light.turn_on
+    - data:
+        entity_id: media_player.samsung_smart_remote
+      service: media_player.turn_on

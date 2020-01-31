@@ -1,0 +1,55 @@
+---
+esphome:
+  name: niklas_environment
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+api:
+
+logger:
+  level: DEBUG
+
+ota:
+  password: !secret ota_password
+
+i2c:
+  sda: D2
+  scl: D1
+  scan: false
+
+sensor:
+  - platform: bme280
+    temperature:
+      name: "Niklas' Zimmer Temperatur"
+      oversampling: 16x
+      filters:
+        - offset: -1.0
+    pressure:
+      name: "Niklas' Zimmer Luftdruck"
+    humidity:
+      name: "Niklas' Zimmer Luftfeuchtigkeit"
+    address: 0x76
+    update_interval: 15s
+  - platform: adc
+    pin: A0
+    name: "Niklas' Zimmer Helligkeit"
+    update_interval: 2s
+    unit_of_measurement: lux
+    filters:
+      - or:
+          - throttle: 15s
+          - delta: 0.02
+      - lambda: >-
+          return (x / 10000.0) * 2000000.0;
+
+binary_sensor:
+  - platform: gpio
+    pin: D5
+    name: "Niklas' Zimmer Bewegung"
+    device_class: motion
+  - platform: status
+    name: "Niklas' Zimmer Status"

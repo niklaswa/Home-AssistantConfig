@@ -1,0 +1,28 @@
+---
+automation:
+
+binary_sensor:
+  - name: Klingel
+    payload_off: "0"
+    payload_on: "1"
+    platform: mqtt
+    state_topic: 7FEF4E/bell/state
+ios:
+  push:
+    categories:
+      - actions:
+          - activationMode: background
+            authenticationRequired: true
+            destructive: true
+            identifier: UNLOCK_FRONTDOOR
+            title: Ja
+        identifier: frontdoor
+        name: Haustür
+lock:
+  - command_topic: 7FEF4E/door/switch
+    name: Haustür
+    optimistic: false
+    payload_lock: "0"
+    payload_unlock: "1"
+    platform: mqtt
+    state_topic: 7FEF4E/door/switch

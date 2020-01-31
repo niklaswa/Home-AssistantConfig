@@ -1,0 +1,94 @@
+---
+date_format: "DD. MMM YYYY"
+groups:
+  - entities:
+      - binary_sensor.niklas_zimmer_bewegung
+      - binary_sensor.kuche_bewegung
+      - binary_sensor.flur_bewegung
+    name: "Bewegungs Sensoren"
+    text_template: "${entity.state == \"on\" ? \"Bewegung erkannnt\" : \"-\"}"
+  - class_template: " var temp = parseFloat(entity.state.replace(\"°\", \"\")); if (temp < 15) return \"temp-very-low-background\"; else if (temp < 30) return \"temp-average-background\"; else return \"temp-very-high-background\"; "
+    entities:
+      - sensor.kuche_temperatur
+      - sensor.flur_temperatur
+      - sensor.bad_temperatur
+      - sensor.niklas_zimmer_temperatur
+    name: "Temperatur Sensoren"
+    text_template: "${entity.state ? entity.state : \"-\"}°C"
+  - entities:
+      - sensor.kuche_helligkeit
+      - sensor.bad_helligkeit
+      - sensor.niklas_zimmer_helligkeit
+    name: "Helligkeits Sensoren"
+    text_template: "${entity.state ? entity.state : \"-\"} LUX"
+  - entities:
+      - sensor.kuche_luftfeuchtigkeit
+      - sensor.bad_luftfeuchtigkeit
+      - sensor.flur_luftfeuchtigkeit
+      - sensor.niklas_zimmer_luftfeuchtigkeit
+    name: "Luftfeuchtigkeits Sensoren"
+    text_template: "${entity.state ? entity.state : \"-\"}%"
+  - entities:
+      - sensor.flur_luftdruck
+    name: "Luftdruck Sensoren"
+    text_template: "${entity.state ? entity.state : \"-\"} hPa"
+  - action:
+      domain: homeassistant
+      service: toggle
+    entities:
+      - light.deckenlampe
+      - light.tv_leds
+      - light.glaskugel
+      - light.luefter
+      - light.computer_zubehor
+      - switch.niklaspc
+      - light.stehlampe
+      - light.onoff_plug_5
+      - light.kuche_led
+      - light.bad_led
+      - light.kuechenlicht
+      - light.flurlicht
+      - light.leds_bei_den_pokalen
+    name: Lights
+    states:
+      - class: light-on
+        state: "on"
+      - class: light-off
+        state: "off"
+  - action:
+      domain: homeassistant
+      service: toggle
+    entities:
+      - light.luefter
+    name: Lüfter
+    states:
+      - class: rotating
+        state: "on"
+      - class: light-off
+        state: "off"
+  - entities:
+      - fan.xiaomi_miio_device
+    name: Klima
+    states:
+      - class: rotating
+        state: "on"
+      - class: light-off
+        state: "off"
+  - entities:
+      - media_player.samsung_tv_remote
+      - media_player.apple_tv
+      - media_player.wohnzimmer
+      - media_player.kuche
+    name: "Media Players"
+  - entities:
+      - binary_sensor.door_window_sensor_158d00020b7d0f
+      - binary_sensor.door_window_sensor_158d0002046916
+    name: "Entry Points"
+    states:
+      - class: window-closed
+        state: "off"
+      - class: window-open
+        state: "on"
+image: /local/custom_ui/3dfloorplan/3dfloorplan.svg
+name: "WG Grundriss"
+stylesheet: /local/custom_ui/3dfloorplan/floorplan.css

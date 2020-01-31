@@ -1,0 +1,46 @@
+---
+esphomeyaml:
+  name: doorbell
+  platform: ESP8266
+  board: d1_mini
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+api:
+
+# Enable logging
+logger:
+  level: DEBUG
+
+ota:
+  password: !secret ota_password
+
+output:
+  - platform: gpio
+    pin: D2
+    id: door_opener
+
+switch:
+  - platform: template
+    name: "Haustür öffnen"
+    optimistic: true
+    turn_on_action:
+      - output.turn_on: door_opener
+      - delay: 2000ms
+      - output.turn_off: door_opener
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: D5
+      mode: INPUT_PULLUP
+    name: "Haustürklingel"
+    id: doorbell
+    device_class: sound
+    filters:
+      - invert:
+
+  - platform: status
+    name: "Türklingel Status"

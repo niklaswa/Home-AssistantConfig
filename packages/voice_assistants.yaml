@@ -1,0 +1,99 @@
+---
+alexa:
+  smart_home:
+    filter:
+      include_domains:
+        - alarm_control_panel
+        - fan
+        - climate
+        - cover
+        - lock
+      include_entities:
+        - light.onoff_plug_5
+        - light.kuechenlicht
+        - light.flurlicht
+        - switch.kamera
+        - switch.computer_zubehoer
+        - light.bad_led
+        - light.gateway_light_7811dcb9d0eb
+        - light.kuche_led
+        - light.tv_leds
+        - light.leds_bei_den_pokalen
+        - binary_sensor.door_window_sensor_158d0002046916
+        - binary_sensor.door_window_sensor_158d00020b7d0f
+        - binary_sensor.flur_bewegung
+        - binary_sensor.klingel
+        - binary_sensor.kuche_bewegung
+        - binary_sensor.niklas_zimmer_bewegung
+        - sensor.bad_luftfeuchtigkeit
+        - sensor.bad_temperatur
+        - sensor.flur_luftfeuchtigkeit
+        - sensor.flur_temperatur
+        - sensor.kuche_luftfeuchtigkeit
+        - sensor.kuche_temperatur
+        - sensor.niklas_zimmer_temperatur
+        - switch.ritzdect_200_1
+        - switch.mqttsign
+        - switch.niklascomputer
+        - light.bett_leds
+        - switch.teckin_1_relay
+        - switch.teckin_3_relay
+automation:
+  - action:
+      - delay: 120
+      - service: homekit.start
+    alias: "Start HomeKit"
+    initial_state: "on"
+    trigger:
+      - event: start
+        platform: homeassistant
+homekit:
+  auto_start: false
+  entity_config:
+    switch.ritzdect_200_1:
+      type: outlet
+  filter:
+    include_domains:
+      - alarm_control_panel
+      - fan
+      - climate
+      - cover
+      - lock
+    include_entities:
+      - light.onoff_plug_5
+      - light.kuechenlicht
+      - light.flurlicht
+      - switch.kamera
+      - switch.computer_zubehoer
+      - light.bad_led
+      - light.gateway_light_7811dcb9d0eb
+      - light.kuche_led
+      - light.tv_leds
+      - light.leds_bei_den_pokalen
+      - binary_sensor.door_window_sensor_158d0002046916
+      - binary_sensor.door_window_sensor_158d00020b7d0f
+      - binary_sensor.flur_bewegung
+      - binary_sensor.klingel
+      - binary_sensor.kuche_bewegung
+      - binary_sensor.niklas_zimmer_bewegung
+      - sensor.bad_luftfeuchtigkeit
+      - sensor.bad_temperatur
+      - sensor.flur_luftfeuchtigkeit
+      - sensor.flur_temperatur
+      - sensor.kuche_luftfeuchtigkeit
+      - sensor.kuche_temperatur
+      - sensor.niklas_zimmer_temperatur
+      - switch.ritzdect_200_1
+      - switch.mqttsign
+      - switch.niklascomputer
+      - light.bett_leds
+      - switch.teckin_1_relay
+      - switch.teckin_3_relay
+  name: !secret host_name
+notify:
+  - command: "/config/alexa_wrapper.sh -d \"Niklas' Echo\""
+    name: "Niklas' Echo"
+    platform: command_line
+  - command: "/config/alexa_wrapper.sh -d \"Niklas's Sonos One\""
+    name: "Sonos One"
+    platform: command_line

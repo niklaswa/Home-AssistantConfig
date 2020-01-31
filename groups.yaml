@@ -1,0 +1,45 @@
+---
+allresidents:
+  name: Alle Bewohner
+  entities:
+   - person.niklas
+   - person.jan
+   - person.christoph
+bathroom:
+  entities:
+    - media_player.wohnzimmer
+  icon: "mdi:water-pump"
+  name: Bad
+  view: true
+computer:
+  entities:
+    - switch.niklaspc
+    - light.computer_zubehor
+  name: Computer
+  view: false
+mqqtsigngrp:
+  entities:
+    - input_select.mqttsignscrolling
+    - input_number.mqttsignspeed
+    - input_number.mqttsignbrightness
+    - input_boolean.mqttsign
+    - input_text.mqttsign_text8
+    - input_text.mqttsign_text9
+    - input_text.mqttsign_text10
+  name: MQTTSign
+niklasroom:
+  entities:
+    - light.bett
+    - light.sockel
+    - light.stehlampe
+    - light.glaskugel
+    - camera.generic_camera
+    - media_player.samsung_tv_remote
+    - sensor.living_room_lux
+    - sensor.living_room_temperature
+    - sensor.livingroom_motion
+    - light.kamera
+    - switch.leds_bei_den_pokalen
+    - switch.klimaanlage
+  name: "Niklas' Zimmer"
+  view: true

@@ -1,0 +1,56 @@
+---
+automation:
+  - action:
+      - data:
+          data:
+            attachment:
+              content-type: jpeg
+            entity_id: camera.generic_camera
+            push:
+              category: camera
+          message: "Bewegung, obwohl keine bekannte Person zu Hause ist!"
+        service: notify.ios_niphonex
+      - data:
+          entity_id: camera.generic_camera
+          filename: "/tmp/cam/yourcamera_{{ now().strftime(\"%Y%m%d-%H%M%S\") }}.jpg"
+        service: camera.snapshot
+    alias: Hausalarm
+    condition:
+      - condition: state
+        entity_id: device_tracker.niphonex
+        state: not_home
+      - condition: state
+        entity_id: light.kamera
+        state: "on"
+    id: home_alarm
+    trigger:
+      - entity_id: sensor.niklas_zimmer_bewegung
+        platform: state
+        to: "1"
+  - action:
+      - data:
+          entity_id: switch.teckin_1_relay
+        service: switch.turn_off
+    alias: "Heizlüfter nach 10 Minuten Betrieb aus"
+    condition: []
+    id: "1541372173545"
+    trigger:
+      - entity_id: switch.teckin_1_relay
+        for: 600
+        platform: state
+        to: "on"
+  - action:
+      - data:
+          brightness: 30
+          entity_id: light.kuechenlicht
+        service: light.turn_on
+    alias: "Neue Automatisierung"
+    condition:
+      - below: "10"
+        condition: numeric_state
+        entity_id: sensor.kuche_helligkeit
+    id: "1542996928619"
+    trigger:
+      - entity_id: binary_sensor.kuche_bewegung
+        platform: state
+        to: "on"

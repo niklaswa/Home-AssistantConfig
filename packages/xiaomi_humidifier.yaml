@@ -1,0 +1,9 @@
+---
+########################################################################
+### Humidifier
+########################################################################
+fan:
+  - host: !secret ip_xiaomi_humidifier
+    platform: xiaomi_miio
+    token: !secret secret_xiaomi_humidifier
+    model: zhimi.humidifier.cb1

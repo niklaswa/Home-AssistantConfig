@@ -1,0 +1,136 @@
+- id: '1577731062970'
+  name: Movie
+  entities:
+    cover.curtain_158d0002830b2f:
+      friendly_name: Niklas' Vorhang
+      state: closed
+- id: '1577740371027'
+  name: Party
+  entities:
+    light.bett_leds:
+      brightness: 255
+      effect: Large Slow Rainbow Effect
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: Bett LEDs
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      state: 'on'
+      supported_features: 61
+      xy_color:
+      - 0.323
+      - 0.329
+    light.leds_bei_den_pokalen:
+      brightness: 255
+      effect: colorloop
+      effect_list:
+      - blue_fade
+      - blue_strobe
+      - colorjump
+      - colorloop
+      - colorstrobe
+      - cyan_fade
+      - cyan_strobe
+      - gb_cross_fade
+      - green_fade
+      - green_strobe
+      - purple_fade
+      - purple_strobe
+      - rb_cross_fade
+      - red_fade
+      - red_strobe
+      - rg_cross_fade
+      - white_fade
+      - white_strobe
+      - yellow_fade
+      - yellow_strobe
+      - random
+      friendly_name: LEDs bei den Pokalen
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      state: 'on'
+      supported_features: 21
+      xy_color:
+      - 0.323
+      - 0.329
+    light.tv_leds:
+      brightness: 184
+      effect: Large Slow Rainbow Effect
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: TV LEDs
+      hs_color:
+      - 195.082
+      - 71.765
+      rgb_color:
+      - 71
+      - 208
+      - 255
+      state: 'on'
+      supported_features: 61
+      xy_color:
+      - 0.166
+      - 0.268
+- id: '1579889472591'
+  name: Hell
+  entities:
+    light.deckenlampe:
+      brightness: 254
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Deckenlampe
+      hs_color:
+      - 0
+      - 0.392
+      icon: mdi:ceiling-light
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 254
+      - 254
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.324
+      - 0.329

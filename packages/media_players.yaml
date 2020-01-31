@@ -1,0 +1,16 @@
+---
+apple_tv:
+ #   host: !secret ip_appletv
+  #  name: "Niklas' Apple TV"
+   # start_off: true
+media_player:
+  - host: !secret ip_samsung_tv_43
+    mac: !secret mac_samsungtv
+    platform: samsungtv
+    port: 8001
+    timeout: 5
+  - client_id: !secret spotify_client_id
+    client_secret: !secret spotify_client_secret
+    platform: spotify
+  - host: !secret ip_android_tv
+    platform: kodi

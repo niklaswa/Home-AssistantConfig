@@ -1,0 +1,7 @@
+---
+magic_mirror_notification: "curl -X GET 'http://192.168.178.50:8124/syslog?type={{ type }}&message={{ message }}'"
+pc_restart: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no niklas@192.168.178.21 \"shutdown -r -f\"; ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no niklas@192.168.178.21 \"sudo shutdown -r now\""
+pc_shutdown: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no niklas@192.168.178.21 \"shutdown -s\"; ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no niklas@192.168.178.21 \"sudo shutdown -h now\""
+pc_start_rocketleague: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no niklas@192.168.178.21 \"S:\\SteamLibrary\\steamapps\\common\\rocketleague\\Binaries\\Win32\\RocketLeague.exe\";"
+start_amazon_fire_tv: "curl http://localhost:5556/devices/default/apps/com.netflix.ninja/start"
+start_netflix_fire_tv: "curl http://localhost:5556/devices/default/apps/com.netflix.ninja/start"

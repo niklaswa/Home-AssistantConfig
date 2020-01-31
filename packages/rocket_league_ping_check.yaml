@@ -1,0 +1,23 @@
+---
+binary_sensor:
+  - host: ip31-204-146-44.datahound.com
+    name: "Rocket League Host 1"
+    platform: ping
+  - host: ip64-95-102-238.datahound.com
+    name: "Rocket League Host 2"
+    platform: ping
+  - host: ip206-191-156-17.datahound.com
+    name: "Rocket League Host 3"
+    platform: ping
+  - host: ip109-200-217-189.datahound.com
+    name: "Rocket League Host 4"
+    platform: ping
+  - host: ip31-204-146-55.datahound.com
+    name: "Rocket League Host 5"
+    platform: ping
+  - host: ip45-32-238-220.datahound.com
+    name: "Rocket League Host 6"
+    platform: ping
+  - host: ip64-95-103-14.datahound.com
+    name: "Rocket League Host 7"
+    platform: ping

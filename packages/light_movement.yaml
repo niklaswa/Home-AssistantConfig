@@ -1,0 +1,62 @@
+---
+automation:
+  - action:
+      - data:
+          brightness: 30
+          entity_id: light.kuechenlicht
+        service: light.turn_on
+      - data:
+          entity_id: light.onoff_plug_5
+        service: light.turn_on
+    alias: "Turn on kitchen light when there is movement"
+    condition:
+      - below: "13"
+        condition: numeric_state
+        entity_id: sensor.kuche_helligkeit
+    id: kitchen_light_on
+    trigger:
+      - entity_id: binary_sensor.kuche_bewegung
+        platform: state
+        to: "on"
+  - action:
+      - data:
+          entity_id: light.onoff_plug_5
+        service: light.turn_off
+      - data:
+          entity_id: light.kuechenlicht
+        service: light.turn_off
+    alias: "Turn off kitchen light 2 minutes after last movement"
+    id: kitchen_light_off
+    trigger:
+      - entity_id: binary_sensor.kuche_bewegung
+        for:
+          minutes: 2
+        platform: state
+        to: "off"
+  - action:
+      - data:
+          brightness: 200
+          color_name: blue
+          entity_id: light.stehlampe
+        service: light.turn_on
+    alias: "Turn on hallway light when there is movement"
+    id: hallway_light_on
+    trigger:
+      - entity_id: binary_sensor.flur_bewegung
+        platform: state
+        to: "on"
+  - action:
+      - data:
+          entity_id: light.stehlampe
+        service: light.turn_off
+      - data:
+          entity_id: light.flurlicht
+        service: light.turn_off
+    alias: "Turn off hallway light 2 minutes after last movement"
+    id: hallway_light_off
+    trigger:
+      - entity_id: binary_sensor.flur_bewegung
+        for:
+          minutes: 2
+        platform: state
+        to: "off"

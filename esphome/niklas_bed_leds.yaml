@@ -1,0 +1,60 @@
+---
+esphome:
+  name: niklas_bed_leds
+  platform: ESP8266
+  board: d1_mini
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+api:
+
+# Enable logging
+logger:
+#  level: DEBUG
+
+ota:
+  password: !secret ota_password
+
+light:
+  - platform: fastled_clockless
+    chipset: WS2812B
+    pin: D5
+    num_leds: 170
+    rgb_order: GRB
+    name: "Bett LEDs"
+    effects:
+      - strobe:
+      - flicker:
+      - addressable_rainbow:
+      - addressable_rainbow:
+          name: Large Rainbow Effect
+          speed: 14
+          width: 85
+      - addressable_rainbow:
+          name: Large Slow Rainbow Effect
+          speed: 7
+          width: 85
+      - addressable_rainbow:
+          name: Little Rainbow Effect
+          speed: 16
+          width: 42
+      - addressable_rainbow:
+          name: Fast Rainbow Effect
+          speed: 90
+          width: 85
+      - addressable_rainbow:
+          name: Ultra Fast Rainbow Effect
+          speed: 170
+          width: 85
+      - addressable_flicker:
+      - addressable_color_wipe:
+      - addressable_scan:
+      - addressable_twinkle:
+      - addressable_random_twinkle:
+      - addressable_fireworks:
+
+binary_sensor:
+  - platform: status
+    name: "Bett LEDs Status"

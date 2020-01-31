@@ -1,0 +1,44 @@
+---
+automation:
+  - action:
+      - data_template:
+          entity_id: fan.xiaomi_miio_device
+          level: "{{ trigger.to_state.state | int }}"
+        service: fan.xiaomi_miio_set_favorite_level
+      - data:
+          entity_id: fan.xiaomi_miio_device
+          speed: Favorite
+        service: fan.set_speed
+    alias: "Xiaomi Air Purifier Adjust Level"
+    id: air_prifier_level
+    trigger:
+      - entity_id: input_number.xiaomi_miio_favorite_level
+        platform: state
+fan:
+  - host: !secret ip_xiaomi_air_purifier
+    platform: xiaomi_miio
+    token: !secret xiaomi_air_purifier_token
+input_number:
+  xiaomi_miio_favorite_level:
+    initial: 4
+    max: 16
+    min: 1
+    name: "Ventilator Stärke"
+    step: 1
+sensor:
+  - platform: template
+    sensors:
+      air_purifier_aqi:
+        friendly_name: "Air Purifier AQI"
+        unit_of_measurement: AQI
+        value_template: "{{ states.fan.xiaomi_miio_device.attributes.aqi }}"
+      air_purifier_humidity:
+        device_class: humidity
+        friendly_name: "Air Purifier Luftfeuchtigkeit"
+        unit_of_measurement: "%"
+        value_template: "{{ states.fan.xiaomi_miio_device.attributes.humidity }}"
+      air_purifier_temp:
+        device_class: temperature
+        friendly_name: "Air Purifier Temperatur"
+        unit_of_measurement: F
+        value_template: "{{ ((states.fan.xiaomi_miio_device.attributes.temperature * 9)/5 + 32)|round }}"

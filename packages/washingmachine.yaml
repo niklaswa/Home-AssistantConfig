@@ -1,0 +1,36 @@
+---
+########################################################################
+### Washing machine
+########################################################################
+binary_sensor:
+  - platform: template
+    sensors:
+      washing_machine:
+        friendly_name: "Waschmaschine"
+        delay_off:
+          minutes: 2
+        value_template: >-
+          {{ states('sensor.teckin_2_power')|float > 3 }}
+
+homeassistant:
+  customize:
+    binary_sensor.washing_machine:
+      icon: mdi:washing-machine
+
+ios:
+  push:
+    categories:
+      - actions:
+          - activationMode: background
+            authenticationRequired: true
+            destructive: true
+            identifier: NIKLAS_LAUNDRY
+            title: Ja
+        identifier: washingmachine_activated
+        name: Waschmaschine
+
+input_boolean:
+  niklas_laundry:
+    name: Niklas' Wäsche wird gewaschen
+    initial: off
+    icon: mdi:washing-machine

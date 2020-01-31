@@ -1,0 +1,123 @@
+---
+automation:
+  - action:
+      - data_template:
+          payload_template: "{{states.input_text.mqttsign_text8.state}}"
+          topic: cmnd/MQTTSign/MSG8
+        service: mqtt.publish
+    alias: "Publish mqttsign_text8"
+    hide_entity: true
+    id: mqttsign_text8
+    trigger:
+      - entity_id: input_text.mqttsign_text8
+        platform: state
+  - action:
+      - data_template:
+          payload_template: "{{states.input_text.mqttsign_text9.state}}"
+          topic: cmnd/MQTTSign/MSG9
+        service: mqtt.publish
+    alias: "Publish mqttsign_text9"
+    hide_entity: true
+    id: mqttsign_text9
+    trigger:
+      - entity_id: input_text.mqttsign_text9
+        platform: state
+  - action:
+      - data_template:
+          payload_template: "{{states.input_text.mqttsign_text10.state}}"
+          topic: cmnd/MQTTSign/MSG10
+        service: mqtt.publish
+    alias: "Publish mqttsign_text10"
+    id: mqttsign_text10
+    trigger:
+      - entity_id: input_text.mqttsign_text10
+        platform: state
+  - action:
+      - data_template:
+          payload_template: "{{states.input_select.mqttsignscrolling.state}}"
+          topic: cmnd/MQTTSign
+        service: mqtt.publish
+    alias: "MQTT Sign Scroll"
+    id: mqttsign_signscroll
+    trigger:
+      - entity_id: input_select.mqttsignscrolling
+        platform: state
+  - action:
+      - data_template:
+          payload_template: "{{states.input_number.mqttsignbrightness.state | int}}"
+          topic: cmnd/MQTTSign/INTENSITY
+        service: mqtt.publish
+    alias: "MQTT Sign Brightness"
+    id: mqttsign_signbrightness
+    trigger:
+      - entity_id: input_number.mqttsignbrightness
+        platform: state
+  - action:
+      - data_template:
+          payload_template: "{{states.input_number.mqttsignspeed.state | int}}"
+          topic: cmnd/MQTTSign/SPEED
+        service: mqtt.publish
+    alias: "MQTT Sign Speed"
+    id: mqttsign_signspeed
+    trigger:
+      - entity_id: input_number.mqttsignspeed
+        platform: state
+input_number:
+  mqttsignbrightness:
+    initial: 0
+    max: 15
+    min: 0
+    name: "MQTTSign Brightness"
+    step: 1
+  mqttsignspeed:
+    initial: 25
+    max: 75
+    min: 10
+    name: "MQTTSign Speed"
+    step: 1
+input_select:
+  mqttsignscrolling:
+    icon: "mdi:settings"
+    initial: PA_SCROLL_LEFT
+    name: MQTTSignScrolling
+    options:
+      - PA_PRINT
+      - PA_SCROLL_LEFT
+      - PA_SCROLL_RIGHT
+      - PA_SCROLL_UP
+      - PA_SCROLL_DOWN
+      - PA_SLICE
+      - PA_MESH
+      - PA_FADE
+      - PA_DISSOLVE
+      - PA_BLINDS
+      - PA_RANDOM
+      - PA_WIPE
+      - PA_WIPE_CURSOR
+      - PA_SCAN_HORIZ
+      - PA_SCAN_VERT
+      - PA_OPENING
+      - PA_OPENING_CURSOR
+      - PA_CLOSING
+      - PA_CLOSING_CURSOR
+      - PA_GROW_UP
+      - PA_GROW_DOWN
+input_text:
+  mqttsign_text10:
+    initial: ""
+    name: "MQTTSign Text 10"
+  mqttsign_text8:
+    initial: ""
+    name: "MQTTSign Text 8"
+  mqttsign_text9:
+    initial: ""
+    name: "MQTTSign Text 9"
+switch:
+  - command_topic: cmnd/MQTTSign
+    name: MQTTSign
+    optimistic: false
+    platform: mqtt
+    qos: 0
+    retain: true
+    state_off: "OFF"
+    state_on: "ON"

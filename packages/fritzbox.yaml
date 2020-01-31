@@ -1,0 +1,19 @@
+---
+device_tracker:
+  - platform: fritz
+    consider_home: 100
+    host: !secret fritzbox_host
+    new_device_defaults:
+      hide_if_away: false
+      track_new_devices: false
+    scan_interval: 10
+    username: !secret fritzbox_user
+    password: !secret fritzbox_password
+fritzbox:
+  devices:
+    - host: !secret fritzbox_host
+      password: !secret fritzbox_password
+      username: !secret fritzbox_user
+sensor:
+  - host: !secret fritzbox_host
+    platform: fritzbox_netmonitor

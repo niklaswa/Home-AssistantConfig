@@ -1,0 +1,82 @@
+---
+esphome:
+  name: pc_switch
+  platform: ESP8266
+  board: d1_mini
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+api:
+
+# Enable logging
+logger:
+  level: DEBUG
+
+ota:
+  password: !secret ota_password
+
+i2c:
+  sda: D2
+  scl: D1
+  scan: false
+
+sensor:
+  - platform: bme280
+    temperature:
+      name: "Computer Temperatur"
+      oversampling: 16x
+      filters:
+        - offset: -1.0
+    pressure:
+      name: "Computer Luftdruck"
+    humidity:
+      name: "Computer Luftfeuchtigkeit"
+    address: 0x76
+    update_interval: 15s
+
+output:
+  - platform: gpio
+    pin: D6
+    id: computer_relay
+
+switch:
+  - platform: template
+    optimistic: true
+    id: computer_relay_switch
+    turn_on_action:
+      - output.turn_on: computer_relay
+      - delay: 1500ms
+      - output.turn_off: computer_relay
+  - platform: template
+    name: "Computer"
+    lambda: |-
+      if (id(computer_led).state) {
+        return true;
+      } else {
+        return false;
+      }
+    turn_on_action:
+      - switch.turn_on: computer_relay_switch
+    turn_off_action:
+      - switch.turn_on: computer_relay_switch
+    optimistic: true
+  - platform: template
+    name: "Force Stop Computer"
+    optimistic: true
+    turn_on_action:
+      - output.turn_on: computer_relay
+      - delay: 6000ms
+      - output.turn_off: computer_relay
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: D5
+      mode: INPUT_PULLUP
+    name: "Computer LED"
+    id: computer_led
+    filters:
+      - invert:
+  - platform: status
+    name: "PC Switch Status"

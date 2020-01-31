@@ -1,0 +1,30 @@
+---
+date_format: DD.MMM.YYYY
+groups:
+  - class_template: " var temp = parseFloat(entity.state.replace(\"°\", \"\")); if (temp < 10) return \"temp-very-low-background\"; else if (temp < 30) return \"temp-below-average-background\"; else return \"temp-very-high-background\"; "
+    entities:
+      - sensor.kitchen_temperature
+    name: Sensors
+    text_template: "${entity.state ? Math.ceil(entity.state) : \"undefined\"}"
+  - action:
+      domain: homeassistant
+      service: toggle
+    entities:
+      - light.deckenlampe
+      - light.stehlampe
+      - light.onoff_plug_5
+      - light.tvleds
+      - ~
+    name: Lights
+    states:
+      - class: light-on
+        state: "on"
+      - class: light-off
+        state: "off"
+  - entities:
+      - media_player.kuche
+      - media_player.samsung_tv_remote
+    name: "Media Players"
+image: /local/custom_ui/floorplan/floorplan.svg
+name: "WG Grundriss"
+stylesheet: /local/custom_ui/floorplan/floorplan.css
