@@ -19,7 +19,7 @@ sensor:
   - platform: command_line
     command: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.178.50 \"[[ \\$(echo 'pow 0' | cec-client -s -d 1) =~ 'status: on' ]] && echo 'on' || echo 'off'\""
     name: mm display
-    scan_interval: 200
+    scan_interval: 30
 # =======================================================================
 #
 # =======================================================================
@@ -27,6 +27,7 @@ switch:
   - platform: command_line
     switches:
       mm_display:
+        value_template: "{{ states('sensor.mm_display') }}"
         command_on: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.178.50 \"echo 'on 0' | cec-client -s -d 1\""
         command_off: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.178.50 \"echo 'standby 0' | cec-client -s -d 1\""
 

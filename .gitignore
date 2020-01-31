@@ -1,5 +1,5 @@
-# Created by https://www.gitignore.io/api/macos,sublimetext,homeassistant
-# Edit at https://www.gitignore.io/?templates=macos,sublimetext,homeassistant
+# Created by https://www.gitignore.io/api/macos,sublimetext,homeassistant,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=macos,sublimetext,homeassistant,visualstudiocode
 
 ### HomeAssistant ###
 # Files with personal details
@@ -48,10 +48,8 @@ www
 home-assistant.log
 ozw_log.txt
 
-# Development files
-sensors/*
-
 # Sepcial includes
+sensors/*
 !/sensors/*.yaml
 !/.stubs/*.yaml
 
@@ -118,4 +116,15 @@ bh_unicode_properties.cache
 # https://packagecontrol.io/packages/sublime-github
 GitHub.sublime-settings
 
-# End of https://www.gitignore.io/api/macos,sublimetext,homeassistant
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
+# End of https://www.gitignore.io/api/macos,sublimetext,homeassistant,visualstudiocode
