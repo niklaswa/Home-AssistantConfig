@@ -27,7 +27,7 @@ switch:
   - platform: command_line
     switches:
       mm_display:
-        value_template: "{{ states('sensor.mm_display') }}"
+        value_template: "{{ is_state('sensor.mm_display', 'on') }}"
         command_on: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.178.50 \"echo 'on 0' | cec-client -s -d 1\""
         command_off: "ssh -i /config/ssh/id_rsa -o StrictHostKeyChecking=no pi@192.168.178.50 \"echo 'standby 0' | cec-client -s -d 1\""
 
