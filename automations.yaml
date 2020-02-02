@@ -168,3 +168,29 @@
   action:
   - entity_id: input_boolean.vacuum_cleaned_today
     service: input_boolean.turn_off
+- id: '1580566577261'
+  alias: Bad Sonos AN
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.bath_light
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - entity_id: sonos.bad
+    service: sonos.restore
+  - entity_id: media_player.bad
+    service: media_player.media_play
+- id: '1580566636009'
+  alias: Bad Sonos AUS
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.bath_light
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - entity_id: sonos.bad
+    service: sonos.snapshot
+  - entity_id: media_player.bad
+    service: media_player.media_stop

@@ -30,6 +30,10 @@ hacs:
 
 mobile_app:
 
+recorder:
+  purge_keep_days: 100
+  purge_interval: 0
+
 person:
 
 frontend:
@@ -70,7 +74,7 @@ hue:
 
 camera:
   - platform: xiaomi
-    name: Niklas' Zimmer
+    name: "Niklas' Zimmer"
     host: !secret ip_camera
     model: 'xiaofang'
     password: YOUR_PASSWORD
