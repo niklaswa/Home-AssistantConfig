@@ -171,4 +171,3 @@ google_assistant:
       expose: true
     light.desk_leds:
       expose: true
-      

@@ -1,13 +1,6 @@
 ---
 homeassistant:
   customize: !include customize.yaml
-#  customize_glob:
-#    script.*:
-#      hidden: true
-#    scene.*:
-#      hidden: true
-#   whitelist_external_dirs:
-#     - !secret whitelist_external_dir
   auth_providers:
     - type: homeassistant
     - type: trusted_networks

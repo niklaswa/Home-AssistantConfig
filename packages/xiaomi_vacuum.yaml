@@ -231,7 +231,7 @@ script:
         data:
           entity_id: vacuum.xiaomi_vacuum
           repeats: 1
-          zone: [[19585,20488,22884,22809],[19560,22720,21128,25342]]
+          zone: [[19585, 20488, 22884, 22809], [19560, 22720, 21128, 25342]]
       - service: script.vacuum_alert_start
   vacuum_hallway:
     sequence:
@@ -239,7 +239,7 @@ script:
         data:
           entity_id: vacuum.xiaomi_vacuum
           repeats: 1
-          zone: [[18531,25429,22884,27525]]
+          zone: [[18531, 25429, 22884, 27525]]
       - service: script.vacuum_alert_start
   vacuum_living_room:
     sequence:
@@ -247,7 +247,7 @@ script:
         data:
           entity_id: vacuum.xiaomi_vacuum
           repeats: 1
-          zone: [[22971,21667,26295,26672]]
+          zone: [[22971, 21667, 26295, 26672]]
       - service: script.vacuum_alert_start
   vacuum_niklas:
     sequence:
@@ -255,7 +255,7 @@ script:
         data:
           entity_id: vacuum.xiaomi_vacuum
           repeats: 1
-          zone: [[18581,27837,22483,32893]]
+          zone: [[18581, 27837, 22483, 32893]]
       - service: script.vacuum_alert_start
   vacuum_jan:
     sequence:
@@ -263,7 +263,7 @@ script:
         data:
           entity_id: vacuum.xiaomi_vacuum
           repeats: 1
-          zone: [[13966,26533,18444,31864]]
+          zone: [[13966, 26533, 18444, 31864]]
       - service: script.vacuum_alert_start
 
   vacuum_alert_start:
