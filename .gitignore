@@ -30,9 +30,12 @@ tradfri.conf
 node-red/*
 esphome/.esphome/esphome.json
 core
+google_assistant_service_account.json
 
-homebridge/accessories/
-homebridge/persist/
+dash/*
+
+homebridge/*
+!homebridge/config.json
 
 # Temporary files
 *.db-journal

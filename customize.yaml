@@ -241,3 +241,11 @@ switch.teckin_1_relay:
   icon: mdi:fan
 fan.xiaomi_miio_device:
   icon: mdi:air-purifier
+scene.alltag:
+  icon: mdi:toggle-switch-off-outline
+scene.ambiente:
+  icon: mdi:palette
+scene.hell:
+  icon: mdi:lightbulb-on-outline
+scene.party:
+  icon: mdi:party-popper

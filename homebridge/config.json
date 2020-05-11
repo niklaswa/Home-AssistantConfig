@@ -1,31 +1,93 @@
 {
-  "bridge": {
-    "name": "Home Assistant",
-    "username": "B8:27:EB:0A:8C:F6",
-    "port": 51826,
-    "pin": "255-13-491"
-  },
-  "description": "Homebridge for Home Assistant",
-  "accessories": [],
-  "platforms": [
-    {
-    "platform": "SamsungTizen",         
-      "devices": [
+    "bridge": {
+        "name": "Home Assistant",
+        "username": "B8:27:EB:0A:8C:F6",
+        "port": 51826,
+        "pin": "255-13-491"
+    },
+    "description": "Homebridge for Home Assistant",
+    "accessories": [],
+    "platforms": [
         {
-            "name": "Fernseher",
-            "ip": "192.168.178.31",
-            "mac": "D8:E0:E1:C9:B5:92",
-            "inputs": [
-                { "name": "YouTube", "app": "111299001912" },
-                { "name": "Netflix", "app": "11101200001" },
-                { "name": "Prime Video", "app": "3201512006785" },
-                { "name": "Apple TV", "command": [ "KEY_DVI" ] },
-                { "name": "Apple TV 1", "command": [ "KEY_HDMI1" ] },
-                { "name": "Apple TV 2", "command": [ "KEY_HDMI" ] },
-                { "name": "TV", "command": [ "KEY_TV" ] }
-            ]      
+            "platform": "SamsungTizen",
+            "devices": [
+                {
+                    "name": "Fernseher",
+                    "ip": "192.168.178.31",
+                    "mac": "D8:E0:E1:C9:B5:92",
+                    "inputs": [
+                        {
+                            "name": "YouTube",
+                            "app": "111299001912"
+                        },
+                        {
+                            "name": "Netflix",
+                            "app": "11101200001"
+                        },
+                        {
+                            "name": "Prime Video",
+                            "app": "3201512006785"
+                        },
+                        {
+                            "name": "Apple TV",
+                            "command": [
+                                "KEY_DVI"
+                            ]
+                        },
+                        {
+                            "name": "Apple TV 1",
+                            "command": [
+                                "KEY_HDMI1"
+                            ]
+                        },
+                        {
+                            "name": "Apple TV 2",
+                            "command": [
+                                "KEY_HDMI"
+                            ]
+                        },
+                        {
+                            "name": "TV",
+                            "command": [
+                                "KEY_TV"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Config",
+            "port": 8080,
+            "auth": "none",
+            "theme": "auto",
+            "tempUnits": "c",
+            "log": {
+                "method": "file"
+            },
+            "platform": "config"
+        },
+        {
+            "name": "Camera ffmpeg",
+            "cameras": [
+                {
+                    "name": "Niklas' Zimmer",
+                    "videoConfig": {
+                        "source": "-rtsp_transport tcp -re -i rtsp://192.168.178.44/unicast",
+                        "maxStreams": 2,
+                        "maxWidth": 640,
+                        "maxHeight": 360,
+                        "maxFPS": 5,
+                        "maxBitrate": 150,
+                        "vcodec": "libx264",
+                        "packetSize": 564,
+                        "acodec": "libopus",
+                        "audio": false,
+                        "debug": false
+                    }
+                }
+            ],
+            "platform": "Camera-ffmpeg"
         }
-      ]
-    }
-  ]
+    ]
 }

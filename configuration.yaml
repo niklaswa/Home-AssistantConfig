@@ -1,13 +1,13 @@
 ---
 homeassistant:
   customize: !include customize.yaml
-  customize_glob:
-    script.*:
-      hidden: true
-    scene.*:
-      hidden: true
-  # whitelist_external_dirs:
-  #   - !secret whitelist_external_dir
+#  customize_glob:
+#    script.*:
+#      hidden: true
+#    scene.*:
+#      hidden: true
+#   whitelist_external_dirs:
+#     - !secret whitelist_external_dir
   auth_providers:
     - type: homeassistant
     - type: trusted_networks
@@ -15,8 +15,6 @@ homeassistant:
         - !secret ip_host
         - !secret ip_magicmirror
         - !secret ip_pc
-        - 192.168.178.42
-        - 192.168.178.50
         - 127.0.0.1
 
   packages: !include_dir_named packages
@@ -33,23 +31,24 @@ mobile_app:
 recorder:
   purge_keep_days: 100
   purge_interval: 0
+  db_url: !secret maria_db_url
 
 person:
 
 frontend:
-  themes: !include themes.yaml
+  themes: !include_dir_merge_named themes
 
-# panel_custom:
+panel_custom:
 #   - name: floorplan
 #     sidebar_title: Floorplan
 #     sidebar_icon: mdi:home
 #     url_path: floorplan
 #     config: !include floorplan.yaml
-#   - name: floorplan
-#     sidebar_title: 3D Floorplan
-#     sidebar_icon: mdi:home
-#     url_path: 3dfloorplan
-#     config: !include 3dfloorplan.yaml
+  - name: floorplan
+    sidebar_title: 3D Floorplan
+    sidebar_icon: mdi:home
+    url_path: 3dfloorplan
+    config: !include 3dfloorplan.yaml
 
 map:
 
@@ -62,7 +61,7 @@ http:
   base_url: !secret base_url
   use_x_forwarded_for: true
   trusted_proxies:
-    - !secret ip_proxy
+    - !secret ip_proxies
 
 api:
 
@@ -110,6 +109,9 @@ light:
       !secret ip_trophy_leds:
         name: LEDs bei den Pokalen
         mode: rgb
+      !secret ip_peg_board_leds:
+        name: PEG Board LEDs
+        mode: rgb
 
 binary_sensor:
   - platform: template
@@ -128,16 +130,21 @@ sensor:
       - weather
       - temperature
   - platform: yr
-
   - platform: miflora
     mac: !secret mac_miflora
     name: Drachenbaum
   - platform: discord_game
     token: !secret discord_bot_token
+    image_format: png
     members:
-      - Niklas#4822
-      - Sunny#8575
-      - Marco#9609
+      - !secret discord_account_1
+      - !secret discord_account_2
+      - !secret discord_account_3
+      - !secret discord_account_4
+      - !secret discord_account_5
+      - !secret discord_account_6
+  - platform: aftership
+    api_key: !secret aftership_api_key
 
 plant:
   drachenbaum:
@@ -165,6 +172,10 @@ xiaomi_aqara:
   gateways:
     - key: !secret aqara_key
 
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
+
 # google:
 #  client_id: !secret google_calendar_id
 #  client_secret: !secret google_calendar_secret
@@ -176,15 +187,6 @@ switch:
     host: !secret ip_pc
     turn_off:
       service: shell_command.pc_shutdown
-
-  - platform: mqtt
-    name: Sonoff1
-    command_topic: "cmnd/sonoff/power"
-    state_topic: "stat/sonoff/POWER"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    retain: true
 
   - platform: template
     switches:
@@ -233,26 +235,6 @@ switch:
           data:
             entity_id: light.onoff_plug_1
 
-# tuya:
-#   username: !secret tuya_username
-#   password: !secret tuya_password
-#   country_code: !secret tuya_cc
-
-mqtt:
-  broker: !secret mqtt_broker
-  port: !secret mqtt_port
-  client_id: !secret mqtt_client_id
-  keepalive: !secret mqtt_keepalive
-  username: !secret mqtt_username
-  password: !secret mqtt_password
-  discovery: false
-
-# notify:
-#   - name: HTML5
-#     platform: html5
-#     gcm_api_key: !secret gcm_api_key
-#     gcm_sender_id: !secret gcm_sender_id
-
 ios:
   push:
     categories:
@@ -271,24 +253,10 @@ speedtestdotnet:
     hours: 5
 
 zone:
-  - name: Arbeit
-    latitude: !secret zone_work_lat
-    longitude: !secret zone_work_long
-    icon: mdi:worker
-    radius: 75
-  - name: Arbeit
-    latitude: !secret zone_work2_lat
-    longitude: !secret zone_work2_long
-    icon: mdi:worker
-  - name: Kantine
-    latitude: !secret zone_canteen_lat
-    longitude: !secret zone_canteen_long
-    radius: 50
-    icon: mdi:food
   - name: Home
-    latitude: !secret zone_home_lat
-    longitude: !secret zone_home_long
-    radius: 30
+    latitude: !secret home_lat
+    longitude: !secret home_long
+    radius: 20
     icon: mdi:home
 
 script: !include scripts.yaml

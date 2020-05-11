@@ -6,7 +6,6 @@ automation:
           topic: cmnd/MQTTSign/MSG8
         service: mqtt.publish
     alias: "Publish mqttsign_text8"
-    hide_entity: true
     id: mqttsign_text8
     trigger:
       - entity_id: input_text.mqttsign_text8
@@ -17,7 +16,6 @@ automation:
           topic: cmnd/MQTTSign/MSG9
         service: mqtt.publish
     alias: "Publish mqttsign_text9"
-    hide_entity: true
     id: mqttsign_text9
     trigger:
       - entity_id: input_text.mqttsign_text9

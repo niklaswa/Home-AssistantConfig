@@ -31,9 +31,7 @@ sensor:
     update_interval: 1s
     unit_of_measurement: lux
     filters:
-      - or:
-          - throttle: 15s
-          - delta: 0.23
+      - delta: 0.03
       - lambda: >-
           return (x / 10000.0) * 2000000.0;
 

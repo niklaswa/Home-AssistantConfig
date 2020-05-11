@@ -9,7 +9,6 @@ alexa:
         - cover
         - lock
       include_entities:
-        - light.onoff_plug_5
         - light.kuechenlicht
         - light.flurlicht
         - switch.kamera
@@ -19,6 +18,7 @@ alexa:
         - light.kuche_led
         - light.tv_leds
         - light.leds_bei_den_pokalen
+        - light.peg_board_leds
         - binary_sensor.door_window_sensor_158d0002046916
         - binary_sensor.door_window_sensor_158d00020b7d0f
         - binary_sensor.flur_bewegung
@@ -38,6 +38,7 @@ alexa:
         - light.bett_leds
         - switch.teckin_1_relay
         - switch.teckin_3_relay
+        - light.desk_leds
 automation:
   - action:
       - delay: 120
@@ -60,7 +61,6 @@ homekit:
       - cover
       - lock
     include_entities:
-      - light.onoff_plug_5
       - light.kuechenlicht
       - light.flurlicht
       - switch.kamera
@@ -70,6 +70,7 @@ homekit:
       - light.kuche_led
       - light.tv_leds
       - light.leds_bei_den_pokalen
+      - light.peg_board_leds
       - binary_sensor.door_window_sensor_158d0002046916
       - binary_sensor.door_window_sensor_158d00020b7d0f
       - binary_sensor.flur_bewegung
@@ -89,6 +90,7 @@ homekit:
       - light.bett_leds
       - switch.teckin_1_relay
       - switch.teckin_3_relay
+      - light.desk_leds
   name: !secret host_name
 notify:
   - command: "/config/alexa_wrapper.sh -d \"Niklas' Echo\""
@@ -97,3 +99,76 @@ notify:
   - command: "/config/alexa_wrapper.sh -d \"Niklas's Sonos One\""
     name: "Sonos One"
     platform: command_line
+
+google_assistant:
+  project_id: !secret google_assistant_project_id
+  service_account: !include ../google_assistant_service_account.json
+  report_state: true
+  exposed_domains:
+    - alarm_control_panel
+    - fan
+    - climate
+    - cover
+    - lock
+  entity_config:
+    light.kuechenlicht:
+      expose: true
+    light.flurlicht:
+      expose: true
+    switch.kamera:
+      expose: true
+    switch.computer_zubehoer:
+      expose: true
+    light.bad_led:
+      expose: true
+    light.gateway_light_7811dcb9d0eb:
+      expose: true
+    light.kuche_led:
+      expose: true
+    light.tv_leds:
+      expose: true
+    light.leds_bei_den_pokalen:
+      expose: true
+    light.peg_board_leds:
+      expose: true
+    binary_sensor.door_window_sensor_158d0002046916:
+      expose: true
+    binary_sensor.door_window_sensor_158d00020b7d0f:
+      expose: true
+    binary_sensor.flur_bewegung:
+      expose: true
+    binary_sensor.klingel:
+      expose: true
+    binary_sensor.kuche_bewegung:
+      expose: true
+    binary_sensor.niklas_zimmer_bewegung:
+      expose: true
+    sensor.bad_luftfeuchtigkeit:
+      expose: true
+    sensor.bad_temperatur:
+      expose: true
+    sensor.flur_luftfeuchtigkeit:
+      expose: true
+    sensor.flur_temperatur:
+      expose: true
+    sensor.kuche_luftfeuchtigkeit:
+      expose: true
+    sensor.kuche_temperatur:
+      expose: true
+    sensor.niklas_zimmer_temperatur:
+      expose: true
+    switch.ritzdect_200_1:
+      expose: true
+    switch.mqttsign:
+      expose: true
+    switch.niklascomputer:
+      expose: true
+    light.bett_leds:
+      expose: true
+    switch.teckin_1_relay:
+      expose: true
+    switch.teckin_3_relay:
+      expose: true
+    light.desk_leds:
+      expose: true
+      

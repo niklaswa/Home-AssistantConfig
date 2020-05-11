@@ -2,14 +2,70 @@
   name: Movie
   entities:
     cover.curtain_158d0002830b2f:
+      battery_level: 100
+      current_position: 0
       friendly_name: Niklas' Vorhang
       state: closed
-- id: '1577740371027'
-  name: Party
-  entities:
+      supported_features: 15
+      voltage: 3.6
+    fan.luftbefeuchter:
+      buzzer: false
+      child_lock: false
+      depth: 51
+      dry: true
+      friendly_name: Luftbefeuchter
+      hardware_version: '0001'
+      humidity: 49
+      icon: mdi:air-humidifier
+      led_brightness: 1
+      mode: medium
+      model: zhimi.humidifier.cb1
+      motor_speed: 0
+      speed_list:
+      - Silent
+      - Medium
+      - High
+      - Auto
+      state: 'off'
+      supported_features: 1
+      target_humidity: 70
+      temperature: 22.6
+      use_time: 3588657
+    fan.xiaomi_miio_device:
+      aqi: 1
+      auto_detect:
+      average_aqi: 2
+      button_pressed:
+      buzzer: false
+      child_lock: false
+      extra_features: 0
+      favorite_level: 14
+      filter_hours_used: 904
+      filter_life_remaining: 74
+      friendly_name: Luftreiniger
+      humidity: 43
+      icon: mdi:air-purifier
+      learn_mode: true
+      led: true
+      led_brightness:
+      mode: silent
+      model: zhimi.airpurifier.ma2
+      motor_speed: 352
+      purify_volume: 218250
+      sleep_mode: silent
+      sleep_mode_learn_count: 30
+      sleep_time: 83428
+      speed_list:
+      - Auto
+      - Silent
+      - Favorite
+      - Idle
+      state: 'off'
+      supported_features: 1
+      temperature: 23.3
+      turbo_mode_supported: false
+      use_time: 30968700
     light.bett_leds:
-      brightness: 255
-      effect: Large Slow Rainbow Effect
       effect_list:
       - None
       - Strobe
@@ -27,21 +83,174 @@
       - Random Twinkle
       - Fireworks
       friendly_name: Bett LEDs
+      state: unavailable
+      supported_features: 61
+    light.deckenlampe:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Deckenlampe
+      icon: mdi:ceiling-light
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.desk_leds:
+      brightness: 34
+      effect: None
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: Desk LEDs
       hs_color:
       - 0
-      - 0
+      - 100
       rgb_color:
       - 255
-      - 255
+      - 0
+      - 0
+      state: 'on'
+      supported_features: 61
+      xy_color:
+      - 0.701
+      - 0.299
+    light.glaskugel:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Glaskugel
+      icon: mdi:brightness-1
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.peg_board_leds:
+      effect_list:
+      - blue_fade
+      - blue_strobe
+      - colorjump
+      - colorloop
+      - colorstrobe
+      - cyan_fade
+      - cyan_strobe
+      - gb_cross_fade
+      - green_fade
+      - green_strobe
+      - purple_fade
+      - purple_strobe
+      - rb_cross_fade
+      - red_fade
+      - red_strobe
+      - rg_cross_fade
+      - white_fade
+      - white_strobe
+      - yellow_fade
+      - yellow_strobe
+      - random
+      friendly_name: PEG Board LEDs
+      state: 'off'
+      supported_features: 21
+    light.tv_leds:
+      brightness: 175
+      effect: Large Slow Rainbow Effect
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: TV LEDs
+      hs_color:
+      - 240
+      - 100
+      rgb_color:
+      - 0
+      - 0
       - 255
       state: 'on'
       supported_features: 61
       xy_color:
-      - 0.323
-      - 0.329
+      - 0.136
+      - 0.04
+- id: '1577740371027'
+  name: Party
+  entities:
+    light.bett_leds:
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: Bett LEDs
+      state: unavailable
+      supported_features: 61
+    light.desk_leds:
+      brightness: 242
+      effect: Large Slow Rainbow Effect
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: Desk LEDs
+      hs_color:
+      - 240
+      - 100
+      rgb_color:
+      - 0
+      - 0
+      - 255
+      state: 'on'
+      supported_features: 61
+      xy_color:
+      - 0.136
+      - 0.04
     light.leds_bei_den_pokalen:
-      brightness: 255
-      effect: colorloop
       effect_list:
       - blue_fade
       - blue_strobe
@@ -65,20 +274,10 @@
       - yellow_strobe
       - random
       friendly_name: LEDs bei den Pokalen
-      hs_color:
-      - 0
-      - 0
-      rgb_color:
-      - 255
-      - 255
-      - 255
-      state: 'on'
+      state: unavailable
       supported_features: 21
-      xy_color:
-      - 0.323
-      - 0.329
     light.tv_leds:
-      brightness: 184
+      brightness: 255
       effect: Large Slow Rainbow Effect
       effect_list:
       - None
@@ -98,16 +297,16 @@
       - Fireworks
       friendly_name: TV LEDs
       hs_color:
-      - 195.082
-      - 71.765
+      - 195.243
+      - 72.549
       rgb_color:
-      - 71
+      - 70
       - 208
       - 255
       state: 'on'
       supported_features: 61
       xy_color:
-      - 0.166
+      - 0.165
       - 0.268
 - id: '1579889472591'
   name: Hell
@@ -134,3 +333,520 @@
       xy_color:
       - 0.324
       - 0.329
+- id: '1581341462492'
+  name: Ambiente
+  entities:
+    light.bett_leds:
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: Bett LEDs
+      state: unavailable
+      supported_features: 61
+    light.deckenlampe:
+      brightness: 80
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Deckenlampe
+      hs_color:
+      - 354.462
+      - 76.471
+      icon: mdi:ceiling-light
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 59
+      - 77
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.635
+      - 0.294
+    light.desk_leds:
+      brightness: 255
+      effect: Large Slow Rainbow Effect
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: Desk LEDs
+      hs_color:
+      - 240
+      - 100
+      rgb_color:
+      - 0
+      - 0
+      - 255
+      state: 'on'
+      supported_features: 61
+      xy_color:
+      - 0.136
+      - 0.04
+    light.glaskugel:
+      brightness: 50
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Glaskugel
+      hs_color:
+      - 81.789
+      - 74.51
+      icon: mdi:brightness-1
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 186
+      - 255
+      - 64
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.344
+      - 0.57
+    light.peg_board_leds:
+      brightness: 15
+      effect_list:
+      - blue_fade
+      - blue_strobe
+      - colorjump
+      - colorloop
+      - colorstrobe
+      - cyan_fade
+      - cyan_strobe
+      - gb_cross_fade
+      - green_fade
+      - green_strobe
+      - purple_fade
+      - purple_strobe
+      - rb_cross_fade
+      - red_fade
+      - red_strobe
+      - rg_cross_fade
+      - white_fade
+      - white_strobe
+      - yellow_fade
+      - yellow_strobe
+      - random
+      friendly_name: PEG Board LEDs
+      hs_color:
+      - 212
+      - 100
+      rgb_color:
+      - 0
+      - 119
+      - 255
+      state: 'on'
+      supported_features: 21
+      xy_color:
+      - 0.14
+      - 0.126
+    light.tv_leds:
+      brightness: 255
+      effect: Large Slow Rainbow Effect
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: TV LEDs
+      hs_color:
+      - 240
+      - 100
+      rgb_color:
+      - 0
+      - 0
+      - 255
+      state: 'on'
+      supported_features: 61
+      xy_color:
+      - 0.136
+      - 0.04
+- id: '1581349399527'
+  name: Alltag
+  entities:
+    cover.curtain_158d0002830b2f:
+      battery_level: 100
+      current_position: 100
+      friendly_name: Niklas' Vorhang
+      state: open
+      supported_features: 15
+      voltage: 3.6
+    fan.luftbefeuchter:
+      buzzer: false
+      child_lock: false
+      depth: 52
+      dry: true
+      friendly_name: Luftbefeuchter
+      hardware_version: '0001'
+      humidity: 50
+      icon: mdi:air-humidifier
+      led_brightness: 1
+      mode: medium
+      model: zhimi.humidifier.cb1
+      motor_speed: 796
+      speed: Medium
+      speed_list:
+      - Silent
+      - Medium
+      - High
+      - Auto
+      state: 'on'
+      supported_features: 1
+      target_humidity: 70
+      temperature: 22.6
+      use_time: 3588663
+    fan.xiaomi_miio_device:
+      aqi: 1
+      auto_detect:
+      average_aqi: 2
+      button_pressed:
+      buzzer: false
+      child_lock: false
+      extra_features: 0
+      favorite_level: 14
+      filter_hours_used: 904
+      filter_life_remaining: 74
+      friendly_name: Luftreiniger
+      humidity: 43
+      icon: mdi:air-purifier
+      learn_mode: true
+      led: true
+      led_brightness:
+      mode: silent
+      model: zhimi.airpurifier.ma2
+      motor_speed: 0
+      purify_volume: 218250
+      sleep_mode: silent
+      sleep_mode_learn_count: 30
+      sleep_time: 83428
+      speed: Silent
+      speed_list:
+      - Auto
+      - Silent
+      - Favorite
+      - Idle
+      state: 'on'
+      supported_features: 1
+      temperature: 23.3
+      turbo_mode_supported: false
+      use_time: 30968700
+    light.bett_leds:
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: Bett LEDs
+      state: unavailable
+      supported_features: 61
+    light.deckenlampe:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Deckenlampe
+      icon: mdi:ceiling-light
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.desk_leds:
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: Desk LEDs
+      state: 'off'
+      supported_features: 61
+    light.glaskugel:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Glaskugel
+      icon: mdi:brightness-1
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.peg_board_leds:
+      effect_list:
+      - blue_fade
+      - blue_strobe
+      - colorjump
+      - colorloop
+      - colorstrobe
+      - cyan_fade
+      - cyan_strobe
+      - gb_cross_fade
+      - green_fade
+      - green_strobe
+      - purple_fade
+      - purple_strobe
+      - rb_cross_fade
+      - red_fade
+      - red_strobe
+      - rg_cross_fade
+      - white_fade
+      - white_strobe
+      - yellow_fade
+      - yellow_strobe
+      - random
+      friendly_name: PEG Board LEDs
+      state: 'off'
+      supported_features: 21
+    light.tv_leds:
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: TV LEDs
+      state: 'off'
+      supported_features: 61
+- id: '1586034235411'
+  name: Party party xd
+  entities:
+    light.bett_leds:
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: Bett LEDs
+      state: unavailable
+      supported_features: 61
+    light.desk_leds:
+      brightness: 242
+      effect: Ultra Fast Rainbow Effect
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: Desk LEDs
+      hs_color:
+      - 240
+      - 100
+      rgb_color:
+      - 0
+      - 0
+      - 255
+      state: 'on'
+      supported_features: 61
+      xy_color:
+      - 0.136
+      - 0.04
+    light.tv_leds:
+      brightness: 255
+      effect: Ultra Fast Rainbow Effect
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: TV LEDs
+      hs_color:
+      - 240
+      - 100
+      rgb_color:
+      - 0
+      - 0
+      - 255
+      state: 'on'
+      supported_features: 61
+      xy_color:
+      - 0.136
+      - 0.04
+- id: '1586034451075'
+  name: fireworks
+  entities:
+    light.bett_leds:
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: Bett LEDs
+      state: unavailable
+      supported_features: 61
+    light.desk_leds:
+      brightness: 255
+      effect: Fireworks
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: Desk LEDs
+      hs_color:
+      - 345.176
+      - 100
+      rgb_color:
+      - 255
+      - 0
+      - 63
+      state: 'on'
+      supported_features: 61
+      xy_color:
+      - 0.667
+      - 0.284
+    light.tv_leds:
+      brightness: 255
+      effect: Fireworks
+      effect_list:
+      - None
+      - Strobe
+      - Flicker
+      - Rainbow
+      - Large Rainbow Effect
+      - Large Slow Rainbow Effect
+      - Little Rainbow Effect
+      - Fast Rainbow Effect
+      - Ultra Fast Rainbow Effect
+      - Addressable Flicker
+      - Color Wipe
+      - Scan
+      - Twinkle
+      - Random Twinkle
+      - Fireworks
+      friendly_name: TV LEDs
+      hs_color:
+      - 0
+      - 100
+      rgb_color:
+      - 255
+      - 0
+      - 0
+      state: 'on'
+      supported_features: 61
+      xy_color:
+      - 0.701
+      - 0.299

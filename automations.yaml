@@ -1,5 +1,5 @@
 - id: '1534018905689'
-  alias: Haustür Benachrichtigung
+  alias: Haustür aufschließen, Push-Message, Zone Enter
   trigger:
   - entity_id: person.niklas
     event: enter
@@ -10,14 +10,10 @@
   - data:
       data:
         apns_headers:
-          apns-collapse-id: frontdoor-ring
+          apns-collapse-id: frontdoor-unlock
         push:
           category: frontdoor
-      message: '{{ "\uD83D\uDD10" }} Möchtest du die Haustür aufschließen?
-
-
-
-        '
+      message: '{{ "\uD83D\uDD10" }} Möchtest du die Haustür aufschließen?'
     service: notify.mobile_app_iphone_11_pro_von_niklas
 - action:
   - entity_id: lock.haustur
@@ -40,17 +36,16 @@
   - data:
       data:
         apns_headers:
-          apns-collapse-id: frontdoor-ring
+          apns-collapse-id: frontdoor-unlock
         push:
           category: frontdoor
-      message: '{{ "\uD83D\uDD14" }} Ding dong! Haustür aufschließen?
-
-
-        '
+      message: '{{ "\uD83D\uDD14" }} Ding dong! Haustür aufschließen?'
     service: notify.mobile_app_iphone_11_pro_von_niklas
   - data:
-      message: Tür klingelt!
-    service: notify.niklas_echo
+      data:
+        type: announce
+      message: ''
+    service: notify.alexa_media_niklas_echo
 - id: '1577632826372'
   alias: Waschmaschine an, warst du das?
   description: ''
@@ -142,6 +137,8 @@
   - at: '14:20'
     platform: time
   - at: '10:00'
+    platform: time
+  - at: '15:41'
     platform: time
   condition:
   - condition: state

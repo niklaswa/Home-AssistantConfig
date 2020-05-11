@@ -78,7 +78,9 @@ groups:
       - media_player.samsung_tv_remote
       - media_player.apple_tv
       - media_player.wohnzimmer
-      - media_player.kuche
+      - media_player.kueche
+      - media_player.bad
+      - media_player.beam
     name: "Media Players"
   - entities:
       - binary_sensor.door_window_sensor_158d00020b7d0f

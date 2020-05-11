@@ -10,13 +10,11 @@ bathroom:
     - media_player.wohnzimmer
   icon: "mdi:water-pump"
   name: Bad
-  view: true
 computer:
   entities:
     - switch.niklaspc
     - light.computer_zubehor
   name: Computer
-  view: false
 mqqtsigngrp:
   entities:
     - input_select.mqttsignscrolling
@@ -42,4 +40,3 @@ niklasroom:
     - switch.leds_bei_den_pokalen
     - switch.klimaanlage
   name: "Niklas' Zimmer"
-  view: true
