@@ -32,11 +32,6 @@ frontend:
   themes: !include_dir_merge_named themes
 
 panel_custom:
-#   - name: floorplan
-#     sidebar_title: Floorplan
-#     sidebar_icon: mdi:home
-#     url_path: floorplan
-#     config: !include floorplan.yaml
   - name: floorplan
     sidebar_title: 3D Floorplan
     sidebar_icon: mdi:home
