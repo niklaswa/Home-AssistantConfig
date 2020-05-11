@@ -1,6 +1,7 @@
 import asyncio
 import json
 import logging
+import re
 
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
@@ -15,6 +16,7 @@ REQUIREMENTS = ['discord.py==1.6.0']
 
 CONF_TOKEN = 'token'
 CONF_MEMBERS = 'members'
+CONF_IMAGE_FORMAT = 'image_format'
 
 DOMAIN = 'sensor'
 
@@ -23,6 +25,7 @@ ENTITY_ID_FORMAT = "sensor.discord_{}"
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(CONF_TOKEN): cv.string,
     vol.Required(CONF_MEMBERS, default=[]): vol.All(cv.ensure_list, [cv.string]),
+    vol.Optional(CONF_IMAGE_FORMAT, default='webp'): vol.In(['png', 'webp', 'jpeg', 'jpg']),
 })
 
 
@@ -30,6 +33,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     import discord
     token = config.get(CONF_TOKEN)
+    image_format = config.get(CONF_IMAGE_FORMAT)
     bot = discord.Client(loop=hass.loop)
     yield from bot.login(token)
 
@@ -141,7 +145,7 @@ def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
         watcher.async_schedule_update_ha_state()
 
     def update_discord_entity_user(watcher: DiscordAsyncMemberState, discord_user: User):
-        watcher._avatar_id = discord_user.avatar
+        watcher._avatar_url = discord_user.avatar_url_as(format=None, static_format=image_format, size=1024).__str__()
         watcher._user_id = discord_user.id
         watcher.async_schedule_update_ha_state(True)
 
@@ -203,7 +207,6 @@ class DiscordAsyncMemberState(Entity):
         self._watching_url = None
         self._watching_details = None
         self._avatar_url = None
-        self._avatar_id = None
         self._user_id = None
         self._custom_status = None
         self._custom_emoji = None
@@ -219,7 +222,9 @@ class DiscordAsyncMemberState(Entity):
     @property
     def entity_id(self):
         """Return the entity ID."""
-        return ENTITY_ID_FORMAT.format(self._member.replace("#", "_").replace(" ", "_").replace(".", "_")).lower()
+        # 1st Regex; keep a-z0-9 [](){} characters, replace with "_"
+        # 2nd Regex; keep only a-z0-9 and single non-leading and non-trailing "_" characters, replace everything else with ""
+        return ENTITY_ID_FORMAT.format(re.sub(r'([^a-z0-9_]|^_+|_+$|(_)\2+)', '', re.sub('[^a-z0-9 \[\]\(\)\{\}\"\']', '_', self._member.lower())))
 
     @property
     def name(self):
@@ -254,7 +259,3 @@ class DiscordAsyncMemberState(Entity):
             'custom_status': self._custom_status,
             'custom_emoji': self._custom_emoji
         }
-
-    def update(self):
-        if self._user_id is not None and self._avatar_id is not None:
-            self._avatar_url = 'https://cdn.discordapp.com/avatars/' + str(self._user_id) + '/' + str(self._avatar_id) + '.webp?size=1024'
